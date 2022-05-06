@@ -1,22 +1,24 @@
 import React from 'react'
-import HeaderComp from "./comp/HeaderComp";
-import CoverComp from "./comp/CoverComp";
-import BlogComp from "./comp/BlogComp";
-import ProductComp from "./comp/ProductComp";
-import FaqComp from "./comp/FaqComp";
-import FooterComp from "./comp/FooterComp";
-
-
 import "./App.css";
+import HeaderComp from './comp/HeaderComp';
+import FooterComp from './comp/FooterComp';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Coin from './comp/Coin';
+  
+  
 const App = () => {
 	return (
-		<div className="app">
+		<div className='app'>
 			<HeaderComp />
-			<CoverComp/>
-			<BlogComp />
-			<ProductComp />
-			<FaqComp />
-			<FooterComp />
+
+			{/* <TopCoin /> */}
+			<BrowserRouter>
+				<Routes>
+					<Route path="/*" element={<Coin />} />
+				</Routes>
+			</BrowserRouter>
+
+			<FooterComp />			
 		</div>
 	)
 }

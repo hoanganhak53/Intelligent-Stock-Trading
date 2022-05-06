@@ -1,8 +1,7 @@
 import React from 'react';
-import graph from "../assets/graph.png";
 import { useEffect, useState } from 'react';
-import { LineChart, Line,XAxis,Tooltip,CartesianGrid,linearGradient, AreaChart,YAxis, Area} from 'recharts';
-import { Queue } from '@material-ui/icons';
+import { AreaChart, Area} from 'recharts';
+import { Outlet, Link } from "react-router-dom";
 
 
 const CoverComp = () => {
@@ -51,34 +50,96 @@ const CoverComp = () => {
 				<button className="yellow_button">Register Now</button>
 			</div>
 
-			<div className="cover_middle cover_grid">	
-			{coin.map(it =>{
-				return(
+			<div className="cover_bottom">
+				<h1>Market trend</h1>
+				<div className="price_table">
 
-						<div className="grid_comp">
-							<div className="comp_top">
-								<div className="comp_top_head">
-									<img src={it.image} alt="bitcoin" />
-									<div>
-										<h2>{it.symbol.toUpperCase()}</h2>
-										<p>Mkt Cap ${it.market_cap}</p>
-									</div>
-									{it.price_change_percentage_24h >= 0 
+					<div className="price_header">
+						<div className="name">
+							<p>#</p>
+						</div>			
+						<div className="name">
+							<p>Name</p>
+						</div>
+						<div className="name">
+							<p></p>
+						</div>
+						<div className="name">
+							<p>Last Price</p>
+						</div>
+						<div className="name">
+							<p>24th Change</p>
+						</div>
+						<div className="name">
+							<p>Market Cap</p>
+						</div>
+
+						<div className="name">
+							<p>Last 7 day</p>
+						</div>
+					</div>
+
+					{coin.map(it => {
+						return (
+						<div className="price_header">
+							<div className="coin_data">
+								<h3>{it.market_cap_rank}</h3>
+							</div>
+							<div className="coin_data">
+								<Link to={`/ty-gia/${it.id}`}>
+									<img src={it.image} />
+								</Link>
+								<p>{it.name}</p>
+
+							</div>
+							<div className="coin_data">
+								<p>{it.symbol.toUpperCase()}</p>
+							</div>
+							<div className="coin_data">
+								<h3>${it.current_price}</h3>
+							</div>
+							<div className="coin_data">
+								{it.price_change_percentage_24h >= 0 
 										? 
 									<p className="color_green">{it.price_change_percentage_24h}%</p>
 									: 
 									<p className="color_red">{it.price_change_percentage_24h}%</p>
-									}
+								}
+							</div>
+							<div className="coin_data">
+								<h3>${it.market_cap}</h3>
+							</div>
+							<div className="coin_data_graph">
+								<AreaChart width={130} height={50} data={formatData(it)}
+									margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+									<Area type="monotone" dataKey="prices" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
+								</AreaChart>
+							</div>
+
+						</div>							
+						)
+					})}
+				</div>
+
+			</div>
+
+			<div className="cover_middle cover_grid">	
+			{trendCoin.coins.map(it =>{
+				return(
+						<div className="grid_comp">
+							<div className="comp_top">
+								<div className="comp_top_head">
+									<img src={it.item.large} />
+									<div>
+										<h2>{it.item.symbol.toUpperCase()}</h2>
+										<p> ${it.item.price_btc * 3864500 }</p>
+									</div>
 								</div>
 							</div>
 							<div className="comp_middle">
 								<h1 className="color_green">{it.current_price} </h1>
-								<p>24h Volume {it.total_volume}</p>
 							</div>
-							<AreaChart width={130} height={50} data={formatData(it)}
-								margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
-								<Area type="monotone" dataKey="prices" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
-							</AreaChart>
+
 							<div className="comp_bottom">
 		
 								<div>
@@ -89,57 +150,6 @@ const CoverComp = () => {
 				)
 			})}
 			</div>
-
-			<div className="cover_bottom">
-				<h1>Market trend</h1>
-
-
-				<div className="price_table">
-
-					<div className="price_header">
-						<div className="name">
-							<p>Name</p>
-						</div>
-						<div className="name">
-							<p>Last Price</p>
-						</div>
-						<div className="name">
-							<p>24th Change</p>
-						</div>
-						<div className="name">
-							<p>Market</p>
-						</div>
-						<div className="name">
-							<p></p>
-						</div>
-					</div>
-
-					{trendCoin.coins.map(it => {
-						return (
-						<div className="price_header">
-							<div className="coin_data">
-								<img src={it.item.thumb} alt="bitcoin" />
-								<p>{it.item.symbol.toUpperCase()}</p>
-							</div>
-							<div className="coin_data">
-								<h3>${it.item.price_btc * 38746.82}</h3>
-							</div>
-							<div className="coin_data">
-								<h4>-0.003</h4>
-							</div>
-							<div className="coin_data_graph">
-								<img src={graph} alt="graph" />
-							</div>
-							<div className="coin_data">
-								<button>Buy</button>
-							</div>
-						</div>							
-						)
-					})}
-				</div>
-
-			</div>
-
 
 			<div className="bottom_line">
 				<h2>View More Markets</h2>

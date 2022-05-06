@@ -15,7 +15,8 @@
 }
 
 .header>img{
-  width:150px;
+  width:250px;
+  padding-left: 15px;
 }
 
 .right_header>h3{
@@ -80,9 +81,6 @@
 .cover_middle{
   background-size:cover;
   background-color: #f8f8f8;
-  border-top-left-radius:2rem;
-  border-top-right-radius:2rem;
-
 }
 
 
@@ -160,6 +158,8 @@
 .cover_bottom{
   padding:4rem;
   background-color: #f8f8f8;
+  border-top-left-radius:2rem;
+  border-top-right-radius:2rem;
 }
 .comp_bottom{
   display: flex;
@@ -212,7 +212,7 @@
   color: #666; 
 }
 
-.coin_data>img{
+.coin_data img{
   width:30px;
 }
 
@@ -220,28 +220,29 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  text-align: right;
 }
 .coin_data>h2{
-   font-size:1.5rem;
+   font-size:1.1rem;
   font-weight: 400;
   color: #666; 
   margin-left: 8px;
 }
 
 .coin_data>h3{
-   font-size:1.5rem;
+   font-size:1.1rem;
   font-weight: 400;
   color: #000; 
 }
 
-.coin_data>p{
-   font-size:1.5rem;
+.coin_data p{
+   font-size:1.1rem;
   font-weight: 400;
-  color: #000; 
   margin-left: 8px;
+  text-decoration: none;
 }
 .coin_data>h4{
-   font-size:1.5rem;
+   font-size:1.1rem;
   font-weight: 400;
   color: #f03; 
 }
@@ -540,4 +541,75 @@ font-size:1.5rem;
 
 .footer_comp_grid>div>.MuiSvgIcon-root:hover{
   color: #f8f8f8;
+}
+
+.detail_price_header{
+  display: flex;
+  flex-direction:column;
+  margin-top:20px;
+  padding:6px;
+}
+.detail_coin_data{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: right;
+  padding: 10px;
+}
+.detail_coin_data img{
+  width:30px;
+}
+.detail_coin_data>p{
+  font-size:1.2rem;
+ font-weight: 600;
+ margin-left: 8px;
+ text-decoration: none;
+}
+.detail_coin_data>h3{
+  font-size:1.8rem;
+ font-weight: 1000px;
+ text-decoration: none;
+}
+.detail_coin_data>h4{
+   padding-left: 8px;
+}
+.rank {
+ width:fit-content;
+ padding-left: 8px;
+}
+.rank>p{
+  background-color: black;
+  padding: 8px;
+  color: #fff;
+  outline-width: 0px;
+  border-width: 0px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.prices_coin {
+  display: flex;
+  flex-direction: row;
+  align-content: space-around;
+  padding: 10px;
+}
+ .market_data{
+  padding: 5px;
+}
+.market_data .title{
+  color: rgb(139, 137, 137);
+  float: left;
+  margin-bottom: 10px;
+  font-size: 14px;
+  line-height: 1.425;
+
+}
+.market_data .value {
+  float: right;
+  padding-left: 100px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  line-height: 1.425;
+
 }
