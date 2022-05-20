@@ -1,11 +1,12 @@
 import React from 'react';
 import logo from "../assets/logo.png";
 import "../App.css";
+import { Link } from "react-router-dom";
 
 const HeaderComp = () => {
 	return (
 		<div className="header">
-			<img src={logo} alt="logo"/>			
+			<img src={logo} alt="logo"/>
 
 			<div className="right_header header">
 				<button className="grey_button yellow_button">Login</button>

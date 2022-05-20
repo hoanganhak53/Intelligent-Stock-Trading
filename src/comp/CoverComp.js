@@ -46,7 +46,7 @@ const CoverComp = () => {
 		<div className="cover">
 			<div className="cover_top">
 				<h1>Buy Bitcoin with INR</h1>
-				<p>Join the world's largest crypto exchange. Designed for India</p>
+				<p>Join the world's largest crypto exchange.</p>
 				<button className="yellow_button">Register Now</button>
 			</div>
 
