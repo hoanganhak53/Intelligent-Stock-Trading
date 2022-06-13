@@ -14,9 +14,6 @@ const FaqComp = () => {
 
 		])
 
-
-
-
 	return (
 		<div >
 				
@@ -36,16 +33,6 @@ const FaqComp = () => {
 
 			</div>
 
-			</div>
-
-			<div className="faq_bottom">
-				<h1>Start Trading Now</h1>
-
-				<div className="row_faq">
-					<button className="bg_yellow">Register Now</button>
-
-					<button >Trade Now</button>
-				</div>
 			</div>
 
 		</div>

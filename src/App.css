@@ -5,27 +5,63 @@
 .header{
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   align-items: center;
   background-color: #000;
   padding-left:10px;
   padding-right:10px;
   color: #fff;
-
 }
 
-.header>img{
+.header :link img{
   width:250px;
   padding-left: 15px;
 }
 
-.right_header>h3{
-  margin-left: 16px;
-  font-weight:600;
-  font-size:0.8rem;
-  cursor: pointer;
+
+.right_header {
+  margin-right: 2%;
+  margin-left: 32%;
+  display: flex;
+  align-items: center;
+}
+.search_header {
+  padding: 18px 0 18px 0;
+  position: relative;
+  padding-left: 27%;
 }
 
+.search_header input{
+  font-family: inherit;
+  border-radius: 50px;
+  font-size: 14px;
+  padding: 0.5rem 1.5rem;
+  width: 300%;
+}
+
+.right_header img {
+  width: 35px;
+  margin-left: 30px;
+  border-radius: 100%;
+}
+
+.right_header>input {
+  font-family: inherit;
+  border-radius: 50px;
+  font-size: 14px;
+  padding: 0.5rem 1.5rem;
+  width: 100px;
+}
+
+
+.right_header a{
+  margin-left: 20px;
+  font-weight:500;
+  font-size: 1rem;
+  text-decoration: none;
+  cursor: pointer;
+  color: #f8f8f8;
+}
 
 .yellow_button{
   background-color: #dea30d;
@@ -37,13 +73,19 @@
   margin-left: 16px;
   cursor: pointer;
 }
+.header_button :hover{
+  background-color: #dea30d;
+  padding:8px 10px 8px 10px;
+  color: #fff;
+  outline-width: 0px;
+  border-width: 0px;
+  border-radius: 8px;
+  margin-left: 16px;
+  cursor: pointer;
+}
 
 .grey_button{
   background-color: transparent;
-}
-
-.right_header>h3:hover{
-  color: #dea30d;
 }
 
 .cover{
@@ -191,60 +233,29 @@
 
 .price_header{
   background-color: #f8f8f8;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
   cursor: pointer;
-  margin-top:20px;
-   padding:6px;
+  padding:200px;
 }
 
 
 .price_header:hover{
   background-color: #fff;
-
-
 }
 
-.name>p{
-  font-size:1rem;
-  font-weight: 400;
-  color: #666; 
+
+.coin_data {
+  margin-top: 10px;
 }
 
-.coin_data img{
-  width:30px;
-}
-
-.coin_data{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  text-align: right;
-}
-.coin_data>h2{
-   font-size:1.1rem;
-  font-weight: 400;
-  color: #666; 
-  margin-left: 8px;
-}
-
-.coin_data>h3{
-   font-size:1.1rem;
-  font-weight: 400;
-  color: #000; 
+.logo_detail img{
+  width:100px;
 }
 
 .coin_data p{
+  padding: 5px;
    font-size:1.1rem;
   font-weight: 400;
-  margin-left: 8px;
-  text-decoration: none;
-}
-.coin_data>h4{
-   font-size:1.1rem;
-  font-weight: 400;
-  color: #f03; 
+  text-decoration-line: none;
 }
 
 .coin_data_graph>img{
@@ -543,79 +554,6 @@ font-size:1.5rem;
   color: #f8f8f8;
 }
 
-.coin_detail{
-  padding-left: 80px;
-}
-
-.detail_price_header{
-  display: flex;
-  flex-direction:column;
-  margin-top:20px;
-  padding:6px;
-}
-.detail_coin_data{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  text-align: right;
-  padding: 10px;
-}
-.detail_coin_data img{
-  width:30px;
-}
-.detail_coin_data>p{
-  font-size:1.2rem;
- font-weight: 600;
- margin-left: 8px;
- text-decoration: none;
-}
-.detail_coin_data>h3{
-  font-size:1.8rem;
- font-weight: 1000px;
- text-decoration: none;
-}
-.detail_coin_data>h4{
-   padding-left: 8px;
-}
-.rank {
- width:fit-content;
- padding-left: 8px;
-}
-.rank>p{
-  background-color: black;
-  padding: 8px;
-  color: #fff;
-  outline-width: 0px;
-  border-width: 0px;
-  border-radius: 8px;
-  font-size: 13px;
-  font-weight: bold;
-}
-
-.prices_coin {
-  display: flex;
-  flex-direction: row;
-  align-content: space-around;
-  padding: 10px;
-}
- .market_data{
-  padding: 5px;
-}
-.market_data .title{
-  color: rgb(139, 137, 137);
-  float: left;
-  margin-bottom: 10px;
-  font-size: 14px;
-  line-height: 1.425;
-
-}
-.market_data .value {
-  float: right;
-  padding-left: 100px;
-  margin-bottom: 10px;
-  font-size: 14px;
-  line-height: 1.425;
-}
 
 .custom_tooltip {
   background-color: #f8f5ef;
@@ -644,12 +582,99 @@ font-size:1.5rem;
 .chose_button_coin button:focus  {
   background-color: rgb(199, 199, 199);
 }
-.chose_button_coin .time_chart_mode{
-  margin-left: 320px
-}
+
 .tradingview iframe {
   width: 1000px;
   height: 600px;
   margin: 50px 0px 50px 0px;
   overflow:hidden;
+}
+
+
+.thi_truong {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 5% 10% 5% 10%;
+}
+.overview{
+  margin-bottom: 30px;
+}
+.overview p{
+  font-size: 1.7rem;
+  font-weight: 500;
+  font-family: Arial,sans-serif;
+  margin-bottom: 15px;
+}
+
+.header_detail {
+  border: 2px solid rgb(228, 227, 227);
+  padding: 20px 15% 20px 15%
+}
+.header_detail>p{
+  padding-top: 20px;
+  font-size: 1.6rem;
+}
+
+.logo_detail {
+  display: flex;
+  flex-direction: row;
+  color:#666;
+}
+.name_detail {
+  margin: 20px;
+}
+
+.index_detail {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.ad_chart {
+  border: 1px solid blue;
+  padding: 10px 20px 10px 20px;
+  border-radius: 8px;
+  color: blue;
+  background-color: #fff;
+  font-weight: 500;
+  font-size: 1rem;
+  text-decoration: none;
+  margin-left: 300px;
+  position: relative;
+  margin-top: 25px;
+  height: fit-content;
+}
+
+.ho_so{
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 8px;
+}
+.list_ho_so {
+  display: flex;
+  flex-direction: row;
+}
+.gray {
+  color: #666;
+}
+
+.trang_chu_index{
+  margin-left: 20px;
+  display: flex;
+  flex-direction: row;
+  border-radius: 20px;
+  background: #fdfdfe;
+  padding: 5px 10px 5px 10px;
+  width: 220px;
+  box-shadow: 0 0 2px 0 #e0e3eb, 0 2px 24px 0 #e0e3eb;
+}
+.trang_chu_index img {
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+}
+.trang_chu_index a{
+  text-decoration: none;
 }

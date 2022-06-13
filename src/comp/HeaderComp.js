@@ -2,18 +2,50 @@ import React from 'react';
 import logo from "../assets/logo.png";
 import "../App.css";
 import { Link } from "react-router-dom";
+import { useState} from 'react';
+import { AccountCircle } from '@material-ui/icons';
 
 const HeaderComp = () => {
+	const [details, setDetails] = useState('')
+	const handleKeypress = e => {
+        if (e.key === 'Enter') {
+            window.location=`http://localhost:3000/co_phieu/${details.toUpperCase()}`;
+        }
+    };
+
 	return (
 		<div className="header">
-			<img src={logo} alt="logo"/>
+            <Link to="/">			
+				<img src={logo} alt="logo"/>	
+			</Link>
 
-			<div className="right_header header">
-				<button className="grey_button yellow_button">Login</button>
-				<button className="yellow_button ">Register</button>
-				<h3>Downloads</h3>
-				<h3>English</h3>
-				<h3>USD</h3>
+			<div className="right_header">
+				<input
+					type='text'
+					placeholder='Tìm kiếm'
+						onChange={e => {
+							setDetails(e.target.value);				
+						}}
+						onKeyPress = {handleKeypress} 
+						value={details}
+				/>
+
+				<div className='header_button'>
+					<a href="http://localhost:3000/login">Đăng nhập</a>
+				</div>
+				<div className='header_button'>
+					<a className='header_button' href="https://vn.tradingview.com/chart/FQsUNQeU/" target="_blank">Biểu đồ</a>					
+				</div>
+				<div className='header_button'>
+					<a className='header_button' href="http://localhost:3000/co_phieu">Cổ phiếu</a>				
+				</div>
+				<div className='header_button'>
+					<a className='header_button' href="http://localhost:3000/tien_te">Tiền tệ</a>					
+				</div>
+				<div className='header_button'>
+					<a className='header_button'>Tin tức</a>					
+				</div>
+				<AccountCircle style={{width:'30px', height:'30px', marginLeft:'20px'}}></AccountCircle>			
 			</div>
 		</div>
 	)

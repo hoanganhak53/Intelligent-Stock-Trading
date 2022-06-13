@@ -1,64 +1,89 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react';
-import { AreaChart, Area, YAxis, XAxis, CartesianGrid, Tooltip} from 'recharts';
-
+import { AdvancedChart,FundamentalData, CompanyProfile,TechnicalAnalysis} from 'react-tradingview-embed';
 
 const DetailCoin = () => {
 	let params = useParams();
-	const [coinData, setCoinData] = useState({
-		image: {},
-		market_data: {
-			current_price: {},
-			price_change_percentage_24h_in_currency: {},
-			market_cap: {},
-			total_volume: {},
-			fully_diluted_valuation: {}
+	const [stockData, setStockData] = useState({
+		"results":{
+			"branding":{}
 		}
 	})
-	const [chartData, setChartData] = useState({prices: []})
-	const [srcImage, setSrc] = useState()
-	const [timeMode, setTimeMode] = useState("7")
-	const [priceMode, setPriceMode] = useState("prices")
+	const [id,setId] = useState('AAPL');
+	const [indexStock,setIndex] = useState({
+		"results":[{'o':'','c':''}]
+	})
+	const [notFound,setNF] = useState(false);
+	const analyst =   {
+		"interval": "1m",
+		"width": 425,
+		"isTransparent": false,
+		"height": 400,
+		"symbol": id,
+		"showIntervalTabs": true,
+		"locale": "vi_VN",
+		"colorTheme": "light"
+	  }
 
+	const symbolInfor =   {
+		"symbol": id,
+		"width": 480,
+		"height": 450,
+		"colorTheme": "light",
+		"isTransparent": false,
+		"locale": "vi_VN"
+	  }
+	const fundamenta =   {
+		"symbol": id,
+		"colorTheme": "light",
+		"isTransparent": false,
+		"largeChartUrl": "",
+		"displayMode": "regular",
+		"width": 480,
+		"height": 850,
+		"locale": "vi_VN"
+	  }
+	const chart =   {
+		"width": "1080",
+		"height": "500",
+		"symbol": id,
+		"interval": "D",
+		"timezone": "Asia/Ho_Chi_Minh",
+		"theme": "light",
+		"style": "2",
+		"locale": "vi_VN",
+		"toolbar_bg": "#f1f3f6",
+		"enable_publishing": false,
+		"hide_top_toolbar": true,
+		"container_id": "tradingview_d01d5"
+	  }
 
 	var myHeaders = new Headers();
 	myHeaders.append("Content-Type", "application/json");
 	useEffect(() => {
-		fetch(`https://api.coingecko.com/api/v3/coins/${params.id}?sparkline=true`, {
+		fetch(`https://api.polygon.io/v2/aggs/ticker/${params.id}/prev?adjusted=true&apiKey=lBNpgaoR6SlQW6j7Xl_eqF6uWaqLdbzD`, {
 			method: 'GET',
 			headers: myHeaders
 		})
 		.then(res => res.json())
 		.then(res => {
-			setCoinData(res)
-			setSrc(res.image.large)
-			console.log(res)
+			setIndex(res)
+			if(res.resultsCount !== 0){
+				setNF(true);
+			}
+		})
+		fetch(`https://api.polygon.io/v3/reference/tickers/${params.id}?apiKey=lBNpgaoR6SlQW6j7Xl_eqF6uWaqLdbzD`, {
+			method: 'GET',
+			headers: myHeaders
+		})
+		.then(res => res.json())
+		.then(res => {
+			setStockData(res)
+			setId(res.results.ticker)
 		})
 	}, []);
 
-	useEffect(() => {
-		fetch(`https://api.coingecko.com/api/v3/coins/${params.id}/market_chart?vs_currency=usd&days=${timeMode}&interval=${timeMode == '1'? 'minutely':'hourly'}`, {
-			method: 'GET',
-			headers: myHeaders
-		})
-		.then(res => res.json())
-		.then(res => {
-			setChartData(res)
-		})
-	}, [timeMode, priceMode]);
-
-	const CustomTooltip = ({ active, payload, label }) => {
-		if (active && payload && payload.length) {
-		  return (
-			<div className="custom_tooltip">
-				<div className='time'><b>{`${label}`}</b></div>
-				<p><b>{priceMode == 'prices'? 'Price' : 'Market Cap'}: </b>{`$${payload[0].value}`}</p>
-			</div>
-		  );
-		}
-		return null;
-	  };
 	
 	const formatMoney = (n, currency) => {
 		if(Number(n) >= 1)
@@ -66,158 +91,76 @@ const DetailCoin = () => {
 		else
 			return currency +  Number(n).toFixed(8)
 	}
-	const formatData = (it) => {
-		let data = []
-		if(priceMode == 'prices')
-		{
-			it.prices.forEach(e => {
-				const d = new Date(e[0])
-				data.push({
-					"time": d.toUTCString(),
-					"prices": e[1] >= 1 ? e[1].toFixed(2): e[1].toFixed(8)
-				})			
-			})			
-		}
-		else
-		{
-			it.market_caps.forEach(e => {
-				const d = new Date(e[0])
-				data.push({
-					"time": d.toUTCString(),
-					"market_caps": e[1] >= 1 ? e[1].toFixed(2): e[1].toFixed(8)
-				})			
-			})
-		}
-		return data
-	}
 
 	return (
-		<div className='coin_detail'>
-			<div className="detail_price_header">
-				<div className="rank">
-					<p>Rank#{coinData.market_cap_rank}</p>
+		<div >
+			{notFound
+				? 
+			<div className='coin_detail'>
+				<div className='header_detail'>
+				<div className='logo_detail'>
+					<div>
+						<img alt='image' src={stockData.results.branding.icon_url + '?apiKey=lBNpgaoR6SlQW6j7Xl_eqF6uWaqLdbzD'}></img>
+					</div>
+					<div className='name_detail'>
+						<p style={{fontSize:'2.1rem',fontWeight:'1000'}}>{stockData.results.name}</p>
+						<p>{stockData.results.ticker}</p>
+					</div>
+					<a className='ad_chart' href={'https://vn.tradingview.com/chart/FQsUNQeU/?symbol=NYSE%3A' + stockData.results.ticker} target='_blank'>
+						Xem trên biểu đồ nâng cao
+					</a>
 				</div>
-				<div className='detail_coin_data'>
-					<img src={srcImage} />
-					<p>{coinData.name} ({String(coinData.symbol).toUpperCase()})</p>
-				</div>
-				<div>
-					<div className='detail_coin_data'>
-						<h3>{formatMoney(coinData.market_data.current_price.usd, '$')}</h3>
-						{Number(coinData.market_data.price_change_percentage_24h_in_currency.usd) >= 0 
-											? 
-										<h4 className="color_green">{Number(coinData.market_data.price_change_percentage_24h_in_currency.usd).toFixed(2)}%</h4>
-										: 
-										<h4 className="color_red">{Number(coinData.market_data.price_change_percentage_24h_in_currency.usd).toFixed(2)}%</h4>
-									}
+				<div className='index_detail'>
+					<div style={{display:'flex',flexDrection:'row',alignItems:'flex-end'}}>
+						<p style={{fontSize:'1.8rem',fontWeight:'800'}}>{indexStock.results[0].o}</p>
+						<p style={{fontSize:'0.7rem',fontWeight:'600',paddingLeft:'3px'}}>USD</p>
+						<p className={indexStock.results[0].o - indexStock.results[0].c > 0 ? 'color_green' : 'color_red'
+							} style={{paddingLeft:'15px',fontSize:'1.0rem'}}>
+							{(indexStock.results[0].o - indexStock.results[0].c).toFixed(2) + " "}
+						 	({((indexStock.results[0].o - indexStock.results[0].c)/indexStock.results[0].o*100).toFixed(2)}%)
+						</p>
+					</div>
+					<div>
+						<p style={{fontSize:'1.2rem'}}>{indexStock.results[0].n}</p>
+						<p style={{color:'#666'}}>Số lượng giao dịch</p>
+					</div>
+					<div>
+						<p style={{fontSize:'1.2rem'}}>{indexStock.results[0].v} USD</p>
+						<p style={{color:'#666'}}>Khối lượng giao dịch</p>
+					</div>
+					<div>
+						<p style={{fontSize:'1.2rem'}}>{formatMoney(stockData.results.market_cap, '$')}</p>
+						<p style={{color:'#666'}}>Vốn hóa</p>
+					</div>
+					<div>
+						<p style={{fontSize:'1.2rem'}}>{new Date(indexStock.results[0].t).toDateString()}</p>
+						<p style={{color:'#666'}}>Lần cập nhật cuối</p>
 					</div>
 				</div>
 			</div>
-			<div className='prices_coin'>
-				<div>
-					<div className='market_data'>
-						{
-							coinData.market_data.market_cap.usd != null ?
-								<div>
-									<span className='title'>Market Cap </span>
-									<span className='value'>{formatMoney(coinData.market_data.market_cap.usd, '$')}</span>
-								</div>
-								: <div></div>						
-						}
-					</div>
-					<div className='market_data'>
-						{
-							coinData.market_data.total_volume.usd != null ?
-								<div>
-									<span className='title'>24 Hour Trading Vol </span>
-									<span className='value'>{formatMoney(coinData.market_data.total_volume.usd, '$')}</span>									
-								</div>
-								: <div></div>						
-						}
-					</div>
-					<div className='market_data'>
-						{
-							coinData.market_data.fully_diluted_valuation.usd != null ?
-								<div>
-									<span className='title'>Fully Diluted Valuation </span>
-									<span className='value'>{formatMoney(coinData.market_data.fully_diluted_valuation.usd,'$')}</span>									
-								</div>
-								: <div></div>						
-						}
-					</div>
+			<div className='header_detail'>
+				<p>Biểu đồ {stockData.results.ticker}</p>
+				<div style={{paddingBottom:'50px',paddingTop:'60px'}}>
+					<AdvancedChart widgetProps={chart}></AdvancedChart>
 				</div>
+					
 				<div>
-					<div className='market_data'>
-						{
-							coinData.market_data.circulating_supply != null ?
-								<div>
-									<span className='title'>Circulating Supply </span>
-									<span className='value'>{formatMoney(coinData.market_data.circulating_supply, '')}</span>									
-								</div>
-								: <div></div>						
-						}
-					</div>
-					<div className='market_data'>
-					{
-							coinData.market_data.total_supply != null ?
-								<div>
-									<span className='title'>Total Supply </span>
-									<span className='value'>{formatMoney(coinData.market_data.total_supply, '')}</span>									
-								</div>
-								: <div></div>						
-						}
-
-					</div>
-					<div className='market_data'>
-						{
-							coinData.market_data.max_supply != null ?
-								<div>
-									<span className='title'>Max Supply </span>
-									<span className='value'>{formatMoney(coinData.market_data.max_supply,'')}</span>									
-								</div>
-								: <div></div>						
-						}
+					<p style={{  paddingBottom: '20px',fontSize: '1.6rem'}}>Hồ sơ</p>
+					<div style={{display:'flex', flexDirection:'row'}}>
+						<FundamentalData widgetProps={fundamenta}></FundamentalData>
+						<div style={{marginLeft:'50px'}}>
+							<CompanyProfile widgetProps={symbolInfor}></CompanyProfile>
+							<TechnicalAnalysis widgetProps={analyst}></TechnicalAnalysis>
+						</div>
 					</div>
 				</div>
 			</div>
-			<h3>{coinData.name} Price Chart ({String(coinData.symbol).toUpperCase()})</h3>
-			<div className='chose_button_coin'>
-				<div className='price_chart_mode'>
-					<button  onClick={() => {setPriceMode("prices")}} style={{
-						borderTopLeftRadius:'5px', borderBottomLeftRadius:'5px'}}>Price</button>
-					<button onClick={() => {setPriceMode("market_cap")}} style={{
-						borderTopRightRadius:'5px', borderBottomRightRadius:'5px' }}>Market Cap</button>
-					<button onClick={() => {setPriceMode("chart_tradingview")}} style={{
-						borderTopRightRadius:'5px', borderBottomRightRadius:'5px' }}>Trading view</button>
-				</div>
-				<div className='time_chart_mode'>
-					<button onClick={() => {setTimeMode("1")}} style={{
-						borderTopLeftRadius:'5px', borderBottomLeftRadius:'5px'}}>24h</button>
-					<button onClick={() => {setTimeMode("7")}}>7d</button>
-					<button onClick={() => {setTimeMode("14")}}>14d</button>
-					<button onClick={() => {setTimeMode("30")}}>30d</button>
-					<button onClick={() => {setTimeMode("90")}} style={{
-						borderTopRightRadius:'5px', borderBottomRightRadius:'5px'}}>90d</button>
-				</div>
 			</div>
-			{priceMode == 'chart_tradingview' ? 
-				<div className='tradingview'>
-					<iframe src='http://127.0.0.1:5501/kk.html'></iframe>
-				</div>
-			: 
-				<div style={{paddingTop: '50px',paddingBottom:'50px'}}>
-					<AreaChart width={900} height={400} data={formatData(chartData)}
-						margin={{ top: 10, right: 0, left: 100, bottom: 10 }}>
-						<XAxis dataKey="time" hide="true"/>
-						<YAxis type="number" domain={['dataMin', 'dataMax']} padding={{ top: 20, bottom: 20 }}/>
-						<CartesianGrid strokeDasharray="3" />
-						<Tooltip content={<CustomTooltip />}/>
-						<Area type="monotone" dataKey={priceMode=='prices'?'prices':'market_caps'} stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)"  />
-					</AreaChart>
-				</div>
-			}
-
-			
+				: 
+			<div style={{fontSize:'2rem',fontWeight:'500',textAlign:'center',height:'200px',paddingTop:'200px'}}>
+				Không có mã giao dịch nào khớp với tiêu chí của bạn
+			</div>
+			}	
 		</div>
 	)
 }

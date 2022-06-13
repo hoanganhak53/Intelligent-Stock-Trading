@@ -10,7 +10,7 @@ const Coin = () => {
 	return (
         <Routes>
             <Route path='' element={<TopCoin />} />
-            <Route path='ty-gia'>
+            <Route path=''>
                 <Route path={`:id`} element={<DetailCoin type='1' />}></Route>
             </Route>
         </Routes>

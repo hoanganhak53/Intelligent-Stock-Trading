@@ -13,8 +13,6 @@ const FaqChild = ({item}) => {
 			{
 				state ? <RemoveIcon onClick={()=>set_state(!state)} /> : <AddCircleIcon onClick={()=>set_state(!state)} />
 			}		
-
-
 			<div className="faq_col">
 				<h1>{item.ques}</h1>
 				<h2>{state ? item.ans : ""}</h2>
