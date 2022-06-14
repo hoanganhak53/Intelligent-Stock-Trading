@@ -68,6 +68,9 @@ export const LoginForm = () =>{
             <div className='error'>{errors.password}</div>
           ): null}
         </Box>
+        <div className='' style={{color:'#00bcd4', fontSize:'0.8rem', fontWeight:'600',marginLeft:'17px'}}>
+          Forgot your password?
+        </div>
         <div className='submit_login row_container'> 
           <FormGroup>
             <FormControlLabel control={

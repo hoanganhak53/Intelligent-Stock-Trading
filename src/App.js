@@ -11,7 +11,18 @@ import Login from './features/login/Login';
   
 const App = () => {
 	return (
-<Login />
+	<React.Fragment>
+		{/* <HeaderComp />
+		<div>
+		<Routes>
+			<Route path="co_phieu/*" element={<Coin/>} />
+			<Route path="/*" element={<TrangChu/>} />
+			<Route path="tien_te/*" element={<Money/>} />
+		</Routes>
+		</div> */}
+		<Login />
+		{/* <FooterComp /> */}
+	</React.Fragment>
 	)
 }
 
