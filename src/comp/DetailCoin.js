@@ -2,6 +2,7 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react';
 import { AdvancedChart,FundamentalData, CompanyProfile,TechnicalAnalysis} from 'react-tradingview-embed';
+import { Button } from '@mui/material';
 
 const DetailCoin = () => {
 	let params = useParams();
@@ -106,9 +107,15 @@ const DetailCoin = () => {
 						<p style={{fontSize:'2.1rem',fontWeight:'1000'}}>{stockData.results.name}</p>
 						<p>{stockData.results.ticker}</p>
 					</div>
-					<a className='ad_chart' href={'https://vn.tradingview.com/chart/FQsUNQeU/?symbol=NYSE%3A' + stockData.results.ticker} target='_blank'>
+					<div>
+					<Button sx={{marginLeft:'130px',marginTop:'30px',textTransform:'none'}} variant='outlined'>
+					
+						<a style={{textDecoration:'none', color:'rgba(25, 118, 210)'}} href={'https://vn.tradingview.com/chart/FQsUNQeU/?symbol=NYSE%3A' + stockData.results.ticker} target='_blank'>
 						Xem trên biểu đồ nâng cao
-					</a>
+						</a>						
+					</Button>							
+					</div>
+				
 				</div>
 				<div className='index_detail'>
 					<div style={{display:'flex',flexDrection:'row',alignItems:'flex-end'}}>
@@ -139,7 +146,15 @@ const DetailCoin = () => {
 				</div>
 			</div>
 			<div className='header_detail'>
-				<p>Biểu đồ {stockData.results.ticker}</p>
+				<div className='row_container'>
+					<p className='db_p'>Biểu đồ {stockData.results.ticker}</p>
+					{
+						localStorage.login ?
+					<Button sx={{marginLeft:'800px',marginTop:'30px',textTransform:'none'}} variant='outlined'>Theo dõi</Button>					 
+						:
+					null
+					}
+				</div>
 				<div style={{paddingBottom:'50px',paddingTop:'60px'}}>
 					<AdvancedChart widgetProps={chart}></AdvancedChart>
 				</div>

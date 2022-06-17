@@ -62,6 +62,15 @@
   cursor: pointer;
   color: #f8f8f8;
 }
+.right_header button{
+  margin-left: 20px;
+  font-weight:500;
+  font-size: 1rem;
+  text-decoration: none;
+  cursor: pointer;
+  color: #f8f8f8;
+  background-color: transparent;
+}
 
 .yellow_button{
   background-color: #dea30d;
@@ -612,7 +621,7 @@ font-size:1.5rem;
   border: 2px solid rgb(228, 227, 227);
   padding: 20px 15% 20px 15%
 }
-.header_detail>p{
+.db_p{
   padding-top: 20px;
   font-size: 1.6rem;
 }
@@ -677,4 +686,7 @@ font-size:1.5rem;
 }
 .trang_chu_index a{
   text-decoration: none;
+}
+
+.dialog_login {
 }

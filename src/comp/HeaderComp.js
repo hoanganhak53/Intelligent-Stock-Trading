@@ -3,8 +3,7 @@ import logo from "../assets/logo.png";
 import "../App.css";
 import { Link } from "react-router-dom";
 import { useState} from 'react';
-import { AccountCircle } from '@material-ui/icons';
-
+import { Avata } from './avata/Avata';
 const HeaderComp = () => {
 	const [details, setDetails] = useState('')
 	const handleKeypress = e => {
@@ -18,7 +17,6 @@ const HeaderComp = () => {
             <Link to="/">			
 				<img src={logo} alt="logo"/>	
 			</Link>
-
 			<div className="right_header">
 				<input
 					type='text'
@@ -29,10 +27,6 @@ const HeaderComp = () => {
 						onKeyPress = {handleKeypress} 
 						value={details}
 				/>
-
-				<div className='header_button'>
-					<a href="http://localhost:3000/login">Đăng nhập</a>
-				</div>
 				<div className='header_button'>
 					<a className='header_button' href="https://vn.tradingview.com/chart/FQsUNQeU/" target="_blank">Biểu đồ</a>					
 				</div>
@@ -45,8 +39,9 @@ const HeaderComp = () => {
 				<div className='header_button'>
 					<a className='header_button'>Tin tức</a>					
 				</div>
-				<AccountCircle style={{width:'30px', height:'30px', marginLeft:'20px'}}></AccountCircle>			
+				<Avata></Avata>
 			</div>
+
 		</div>
 	)
 }
