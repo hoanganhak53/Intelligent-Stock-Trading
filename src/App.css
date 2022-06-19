@@ -1,11 +1,13 @@
 .app{
   height: 100vh;
 }
+body {
+  background-color: rgb(255, 255, 254);
+}
 
 .header{
   display: flex;
   flex-direction: row;
-  /* justify-content: space-between; */
   align-items: center;
   background-color: #000;
   padding-left:10px;
@@ -21,9 +23,10 @@
 
 .right_header {
   margin-right: 2%;
-  margin-left: 32%;
+  margin-left: 65%;
   display: flex;
   align-items: center;
+  position: absolute;
 }
 .search_header {
   padding: 18px 0 18px 0;
@@ -618,7 +621,7 @@ font-size:1.5rem;
 }
 
 .header_detail {
-  border: 2px solid rgb(228, 227, 227);
+  /* border: 0.5px solid #bdbdbd; */
   padding: 20px 15% 20px 15%
 }
 .db_p{
@@ -688,5 +691,38 @@ font-size:1.5rem;
   text-decoration: none;
 }
 
-.dialog_login {
+.header_left_profile {
+  border: 1px solid #bdbdbd;
+  margin-left: 10%;
+  padding:20px;
+  width: 480px;
+}
+
+.label_profile {
+  color:rgb(88, 88, 88);
+  font-size: small;
+}
+.header_right_profile {
+  border: 1px solid #bdbdbd;
+  margin-left: 10%;
+  padding:20px;
+  width: 480px;
+}
+
+.text_new_ideal {
+  white-space: normal; 
+  overflow:hidden;
+  text-overflow: ellipsis;
+  height: 100px;
+}
+
+.chip {
+  font-size: 0.55rem;
+  font-weight: 550;
+  margin-bottom: 6px;
+  padding:0px 4px 0px 4px;
+  background-color: #dea30d;
+  border-radius: 5px;
+  color: #fff;
+  margin-left: 10px;
 }

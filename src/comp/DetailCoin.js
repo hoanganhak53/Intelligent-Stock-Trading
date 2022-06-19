@@ -2,7 +2,7 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react';
 import { AdvancedChart,FundamentalData, CompanyProfile,TechnicalAnalysis} from 'react-tradingview-embed';
-import { Button } from '@mui/material';
+import { Button, Divider } from '@mui/material';
 
 const DetailCoin = () => {
 	let params = useParams();
@@ -145,6 +145,7 @@ const DetailCoin = () => {
 					</div>
 				</div>
 			</div>
+			<Divider />
 			<div className='header_detail'>
 				<div className='row_container'>
 					<p className='db_p'>Biểu đồ {stockData.results.ticker}</p>

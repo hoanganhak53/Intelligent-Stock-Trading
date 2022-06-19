@@ -7,7 +7,6 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import PersonAdd from '@mui/icons-material/PersonAdd';
-import Settings from '@mui/icons-material/Settings';
 import { AccountCircle } from '@material-ui/icons';
 import { Dialog, Typography } from '@material-ui/core';
 import CloseIcon from '@mui/icons-material/Close';
@@ -15,17 +14,19 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Login from '../../features/login/Login';
 import { Logout } from '@mui/icons-material';
-import { Stack } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import NewspaperIcon from '@mui/icons-material/Newspaper';
 import { DangKy } from '../../features/login/DangKy';
+import { useNavigate } from 'react-router-dom';
+import SettingsIcon from '@mui/icons-material/Settings';
 
 export const Avata = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 	const [isOpen,setOpen] = React.useState(false);
 	const [dangNhap,setDangNhap] = React.useState(true);
+  const navigate = useNavigate()
 	const handleOpen = () => {
 		setOpen(true)
 		console.log(isOpen)
@@ -145,11 +146,17 @@ export const Avata = () => {
     transformOrigin={{ horizontal: 'right', vertical: 'top' }}
     anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
   >
-    <MenuItem >
+    <MenuItem onClick={() => {navigate('profile/hoangAnh')}}>
     <ListItemIcon>
       <AccountCircleIcon fontSize="small" />
     </ListItemIcon>
     Hồ sơ
+    </MenuItem>
+    <MenuItem onClick={() => {navigate('setting_profile')}}>
+    <ListItemIcon>
+      <SettingsIcon fontSize="small" />
+    </ListItemIcon>
+    Cài đặt
     </MenuItem>
     <MenuItem>
     <ListItemIcon>
