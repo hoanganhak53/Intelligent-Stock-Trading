@@ -25,7 +25,7 @@ export const Avata = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 	const [isOpen,setOpen] = React.useState(false);
-	const [dangNhap,setDangNhap] = React.useState(true);
+	const [dangNhap,setDangNhap] = React.useState(false);
   const navigate = useNavigate()
 	const handleOpen = () => {
 		setOpen(true)
@@ -51,10 +51,9 @@ export const Avata = () => {
             aria-expanded={open ? 'true' : undefined}
         >
         {
-        
-        localStorage.login ? (
-        <img style={{borderRadius:'100%', width:'32px',height:'32px'}}
-         src='https://i.pinimg.com/474x/e1/d6/4c/e1d64cec80d65014c945044f42949a83.jpg' />
+        (localStorage.login && localStorage.img) ? (
+        <img style={{borderRadius:'100%', width:'32px',height:'32px'}} alt='img'
+         src={localStorage.img} />
         )
         : <Avatar sx={{ width: 30, height: 30, marginLeft:'30px' }}>H</Avatar>
         }
@@ -146,7 +145,7 @@ export const Avata = () => {
     transformOrigin={{ horizontal: 'right', vertical: 'top' }}
     anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
   >
-    <MenuItem onClick={() => {navigate('profile/hoangAnh')}}>
+    <MenuItem onClick={() => {navigate(`profile/${localStorage.name}`)}}>
     <ListItemIcon>
       <AccountCircleIcon fontSize="small" />
     </ListItemIcon>
@@ -170,7 +169,10 @@ export const Avata = () => {
     </ListItemIcon>
     Bài viết
     </MenuItem>
-    <MenuItem onClick={() => {localStorage.clear(); window.location.reload()}}>
+    <MenuItem onClick={() => {
+      localStorage.clear();
+      navigate('/');
+       window.location.reload()}}>
     <ListItemIcon>
       <Logout fontSize="small" />
     </ListItemIcon>

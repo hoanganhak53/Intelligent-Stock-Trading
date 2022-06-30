@@ -10,6 +10,8 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { useNavigate } from 'react-router-dom';
 import React from 'react'
+import axios from 'axios';
+import Swal from 'sweetalert2';
 
 
 const userSchema = yup.object().shape({
@@ -28,19 +30,32 @@ export const LoginForm = () =>{
       initialValues:{
         userNameOrEmailAddress:'',
         password: '',
-        rememberClient:false,
       },
       validationSchema: userSchema,
       onSubmit:async () => {
-        // LoginAPI(values).then((res) => {
-        //   if(res.success){
-        //     navigate('/home');
-        //   }
-        // }).catch(() => {
-        //   swalLoginFailed()
-        // })   
-        localStorage.setItem('login', true)     
-        window.location.reload() 
+        axios.get('https://62ba7bf7573ca8f832856dda.mockapi.io/api/IST/user')
+        .then(res => {
+          const data = res.data;
+          let check = false;
+          data.forEach(e => {
+            if(values.userNameOrEmailAddress === e.username && values.password === e.password){
+              localStorage.userId = e.userId;
+              localStorage.img = e.avatar;
+              check = true;
+            }
+          })
+          if(check){
+            localStorage.setItem('login', true)     
+            navigate('/')
+            window.location.reload()
+          }else {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Login Falled!',
+            })
+          }
+        })
       },
     })
     

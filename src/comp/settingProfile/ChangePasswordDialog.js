@@ -4,11 +4,13 @@ import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import axios from 'axios';
+import { baseAPI } from '../../api/baseAPI';
 
 export function ChangePasswordDialog() {
   const [open, setOpen] = React.useState(false);
+  const [password, setPassword] = React.useState('');
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -17,6 +19,14 @@ export function ChangePasswordDialog() {
   const handleClose = () => {
     setOpen(false);
   };
+  
+  const handleSave = () => {
+    baseAPI.put(`user/${localStorage.userId}`, {
+      password
+    })
+    setOpen(false);
+  };
+
 
   return (
     <div>
@@ -38,6 +48,8 @@ export function ChangePasswordDialog() {
             margin="dense"
             id="name"
             label="Mật khẩu mới"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             type="password"
             fullWidth
             variant="standard"
@@ -56,7 +68,7 @@ export function ChangePasswordDialog() {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Save</Button>
+          <Button onClick={handleSave}>Save</Button>
         </DialogActions>
       </Dialog>
     </div>

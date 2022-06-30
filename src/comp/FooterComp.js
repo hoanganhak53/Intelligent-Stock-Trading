@@ -8,7 +8,6 @@ import TwitterIcon	 from '@material-ui/icons/Twitter';
 
 const FooterComp = () => {
 	return (
-
 		<div>
 		<div className="footer">
 			<div className="footer_comp">

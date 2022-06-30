@@ -83,7 +83,7 @@ const HeaderComp = () => {
 			</div>
 			<div className="right_header">
 				<div className='header_button'>
-					<a className='header_button' href="https://vn.tradingview.com/chart/mPqhJzPT/" target="_blank">Biểu đồ</a>					
+					<a className='header_button' href="https://vn.tradingview.com/chart/FQsUNQeU/" target="_blank">Biểu đồ</a>					
 				</div>
 				<div className='header_button'>
 					<a className='header_button' href="http://localhost:3000/co_phieu">Cổ phiếu</a>				

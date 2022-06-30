@@ -30,6 +30,8 @@
 
     "@testing-library/user-event": "^12.1.10",
 
+    "axios": "^0.27.2",
+
     "formik": "^2.2.9",
 
     "interweave": "^13.0.0",

@@ -1,9 +1,5 @@
 import HttpsRoundedIcon from '@mui/icons-material/HttpsRounded';
 import EmailIcon from '@mui/icons-material/Email';
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-// import { swalLoginFailed } from '../../../swal/LoginFailed';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import Box from '@mui/material/Box';
@@ -11,18 +7,23 @@ import TextField from '@mui/material/TextField';
 import { useNavigate } from 'react-router-dom';
 import React from 'react'
 import { Button } from '@mui/material';
+import axios from 'axios';
 
 
 const userSchema = yup.object().shape({
   userNameOrEmailAddress: yup.string().min(5, 'Username should be longer than 5 characters')
     .max(32,'Username should be shorter than 32 characters').required('Required'),
   password: yup.string().min(6, 'Password should be longer than 6 characters').required('Required'),
-  password2: yup.string().min(6, 'Password should be longer than 6 characters').required('Required')
+  password2: yup.string().when("password", {
+    is: val => (val && val.length > 0 ? true : false),
+    then: yup.string().oneOf(
+      [yup.ref("password")],
+      "Both password need to be the same"
+    )})
 });
 
 const boxSX = { '& > :not(style)': { m: 1 } ,marginBottom:'40px'}
 const iconSX = { color: 'action.active', mr: 1, my: 0.5, marginTop:'20px' }
-const labelCheckBoxSX = { '& .MuiSvgIcon-root': { fontSize: 25, color:'#3f51b5' }}
 
 export const DangKyForm = () =>{
     const navigate = useNavigate();
@@ -35,15 +36,23 @@ export const DangKyForm = () =>{
       },
       validationSchema: userSchema,
       onSubmit:async () => {
-        // LoginAPI(values).then((res) => {
-        //   if(res.success){
-        //     navigate('/home');
-        //   }
-        // }).catch(() => {
-        //   swalLoginFailed()
-        // })   
-        localStorage.setItem('login', true)     
-        window.location.reload() 
+        await axios.post('https://62ba7bf7573ca8f832856dda.mockapi.io/api/IST/user', {
+          "username": values.userNameOrEmailAddress,
+          "password": values.password,
+          "avatar": 'https://a.wattpad.com/useravatar/HnNguynThNgc1.256.347833.jpg',
+          "link": values.userNameOrEmailAddress,
+          "address": "US",
+          "phoneNumber": "000000000",
+          "name": values.userNameOrEmailAddress,
+          "role": false
+        }).then(res => {
+          const data = res.data;
+          localStorage.setItem('userId', data.userId)
+          localStorage.setItem('role', data.role)
+          localStorage.setItem('login', true)     
+          navigate('/');
+          window.location.reload();
+        })
       },
     })
     

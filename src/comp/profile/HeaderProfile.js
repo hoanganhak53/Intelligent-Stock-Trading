@@ -10,19 +10,20 @@ export const HeaderProfile = () => {
   return (
     <div className='row_container' style={{margin:'30px 15%'}}>
         <img style={{width:'150px', height:'150px', borderRadius:"5px"}} 
-            src='https://s3.tradingview.com/userpics/1285035-LLte_big.png'></img>
+            src={localStorage.img}></img>
         <div style={{marginLeft:'40px'}}>
             <div className='row_container'>
-                <p style={{fontSize:'1.75rem', fontWeight:'600'}}>Hoang Anh</p>
+                <p style={{fontSize:'1.75rem', fontWeight:'600'}}>{localStorage.name}</p>
                 <div><Button sx={{textTransform:'none', marginLeft:'500px'}} variant='outlined'>Theo dõi</Button></div>
             </div>
             <div className='row_container' style={{marginTop:'20px'}}>
                 <CalendarMonthIcon color='action'></CalendarMonthIcon>
                 <p style={{margin:'3px 5px 0px 3px', color:'gray'}}>Đã tham gian 1 năm trước</p>
                 <EmailIcon color='action' sx={{marginLeft:'50px'}}/>
-                <p style={{margin:'3px 5px 0px 3px', color:'gray'}}>hoanganhak53@gmail.com</p>
+                <p style={{margin:'3px 5px 0px 3px', color:'gray'}}>{localStorage.link}@gmail.com</p>
                 <Facebook style={{color:'#1877F2', marginLeft:'50px'}}/>
-                <p style={{margin:'3px 5px 0px 3px',color:'#1877F2'}}>hoanganhak53</p>
+                <a style={{margin:'3px 5px 0px 3px',color:'#1877F2'}} 
+                    href={`https://www.facebook.com/${localStorage.link}`} target='_blank'>{localStorage.link}</a>
             </div>
             <div className='row_container' style={{marginTop:'20px'}}>
             <p style={{ fontSize:'1.3rem'}}>0</p>
