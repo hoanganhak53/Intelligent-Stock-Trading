@@ -145,7 +145,7 @@ export const Avata = () => {
     transformOrigin={{ horizontal: 'right', vertical: 'top' }}
     anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
   >
-    <MenuItem onClick={() => {navigate(`profile/${localStorage.name}`)}}>
+    <MenuItem onClick={() => {navigate(`profile/${localStorage.userId}`); window.location.reload()}}>
     <ListItemIcon>
       <AccountCircleIcon fontSize="small" />
     </ListItemIcon>

@@ -80,8 +80,10 @@ const DetailCoin = () => {
 		})
 		.then(res => res.json())
 		.then(res => {
+			if(res.message !== "Ticker not found."){
 			setStockData(res)
-			setId(res.results.ticker)
+			setId(res.results.ticker)				
+			}
 		})
 	}, []);
 

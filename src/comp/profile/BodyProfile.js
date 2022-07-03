@@ -4,6 +4,10 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import { Ideal } from './Ideal';
+import { Follower } from './Follower';
+import { YourFollower } from './YourFollower';
+import { useParams } from 'react-router-dom';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -44,25 +48,28 @@ export function BodyProfile() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+  let params = useParams();
 
   return (
     <Box sx={{ width: '100%' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" style={{margin:'30px 15% 0px 15%'}}>
+        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" style={{margin:'30px 15% 0px 12%'}}>
           <Tab label="Ý tưởng" {...a11yProps(0)} />
           <Tab label="Người theo dõi" {...a11yProps(1)} />
-          <Tab label="Đang theo dõi" {...a11yProps(2)} />
+          {params.id == localStorage.userId &&<Tab label="Đang theo dõi" {...a11yProps(2)} />}
         </Tabs>
       </Box>
-      <TabPanel value={value} index={0}  style={{margin:'0px 15%'}}>
-        Item One
+      <TabPanel value={value} index={0}  style={{margin:'0px 12%'}}>
+        <Ideal/>
       </TabPanel>
-      <TabPanel value={value} index={1}  style={{margin:'0px 15%'}}>
-        Item Two
+      <TabPanel value={value} index={1}  style={{margin:'0px 12%'}}>
+        <YourFollower yourFollower={true}></YourFollower>
       </TabPanel>
-      <TabPanel value={value} index={2}  style={{margin:'0px 15%'}}>
-        Item Three
-      </TabPanel>
+      {params.id == localStorage.userId &&
+        <TabPanel value={value} index={2}  style={{margin:'0px 12%'}}>
+          <YourFollower  yourFollower={false}></YourFollower>
+        </TabPanel>      
+      }
     </Box>
   );
 }

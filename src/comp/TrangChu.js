@@ -13,7 +13,10 @@ const TrangChu = () => {
         localStorage.setItem('name', data.name)
         localStorage.setItem('img', data.avatar)
         localStorage.setItem('about', data.about)
+        localStorage.setItem('role', data.role)
         localStorage.setItem('username', data.username)
+        localStorage.setItem('numPost', data.numPost)
+        localStorage.setItem('numFollower', data.numFollower)
       })
     }
   },[])

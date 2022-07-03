@@ -86,13 +86,13 @@ const HeaderComp = () => {
 					<a className='header_button' href="https://vn.tradingview.com/chart/FQsUNQeU/" target="_blank">Biểu đồ</a>					
 				</div>
 				<div className='header_button'>
-					<a className='header_button' href="http://localhost:3000/co_phieu">Cổ phiếu</a>				
+					<a className='header_button' href="o_phieu">Cổ phiếu</a>				
 				</div>
 				<div className='header_button'>
-					<a className='header_button' href="http://localhost:3000/tien_te">Tiền tệ</a>					
+					<a className='header_button' href="tien_te">Tiền tệ</a>					
 				</div>
 				<div className='header_button'>
-					<a className='header_button'  href="http://localhost:3000/y_tuong">Ý tưởng</a>					
+					<a className='header_button'  href="y_tuong">Ý tưởng</a>					
 				</div>
 				<Avata></Avata>
 			</div>

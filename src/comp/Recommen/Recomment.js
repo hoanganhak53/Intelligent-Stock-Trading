@@ -6,17 +6,18 @@ import { NewFrame } from './NewFrame'
 export const Recomment = () => {
   const [data, setData] = useState([
     {
-      "createdAt": "2022-06-29T17:52:24.471Z",
+      "createAt": "2022-06-29T17:52:24.471Z",
       "title": "Future Brand Consultant",
       "content": "Quaerm ri quisquam.",
       "like": 402,
       "image": "http://loremflickr.com/640/480/business",
       "postId": "2",
-      "userId": "1"
+      "userId": "1",
+      "tag": "Vàng / Đô la Mỹ (OANDA:XAUUSD) ",
      }
   ]);
   useEffect(() => {
-    baseAPI.get('user/1/posts')
+    baseAPI.get('/posts')
     .then(res => {
       setData(res.data);
     })
@@ -31,8 +32,8 @@ export const Recomment = () => {
         <Divider variant='fullWidth'/>
         <div style={{margin:'30px 15%',display:'flex', flexWrap:'wrap'}}>
           {data.map(e => (
-            <NewFrame title={e.title} content={e.content} like={e.like}
-              image={e.image} userId={e.userId} time={e.createdAt}/>
+            <NewFrame title={e.title} content={e.content} like={e.like} tag={e.tag}
+              image={e.image} userId={e.userId} time={e.createAt} postId={e.postId}/>
           ))}
         </div>
     </div>

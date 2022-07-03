@@ -1,7 +1,6 @@
-import axios from 'axios'
-import React, { useEffect } from 'react'
 import { BodyProfile } from './BodyProfile'
 import { HeaderProfile } from './HeaderProfile'
+import React from 'react'
 
 export const Profile = () => {
   return (

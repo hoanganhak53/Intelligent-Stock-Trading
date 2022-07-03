@@ -21,7 +21,7 @@ const App = () => {
 			<Route path="/*" element={<TrangChu/>} />
 			<Route path="tien_te/*" element={<Money/>} />
 			<Route path="setting_profile/*" element={<SettingProfile/>} />
-			<Route path="profile/*" element={<Profile/>} />
+			<Route path={`profile/:id`} element={<Profile/>} />
 			<Route path="y_tuong/*" element={<Recomment/>} />
 		</Routes>
 		</div>

@@ -1,18 +1,11 @@
-import HttpsRoundedIcon from '@mui/icons-material/HttpsRounded';
-import EmailIcon from '@mui/icons-material/Email';
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-// import { swalLoginFailed } from '../../../swal/LoginFailed';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
 import { useNavigate } from 'react-router-dom';
-import React from 'react'
+import React, { useState } from 'react'
 import axios from 'axios';
-import Swal from 'sweetalert2';
-
+import HttpsRoundedIcon from '@mui/icons-material/HttpsRounded';
+import EmailIcon from '@mui/icons-material/Email';
+import { Checkbox, FormGroup, TextField, Box, FormControlLabel } from '@mui/material';
 
 const userSchema = yup.object().shape({
   userNameOrEmailAddress: yup.string().min(5, 'Username should be longer than 5 characters')
@@ -25,6 +18,7 @@ const iconSX = { color: 'action.active', mr: 1, my: 0.5, marginTop:'20px' }
 const labelCheckBoxSX = { '& .MuiSvgIcon-root': { fontSize: 25, color:'#3f51b5' }}
 
 export const LoginForm = () =>{
+    const [error, setError] = useState(false);
     const navigate = useNavigate();
     const {handleSubmit, handleChange, values, touched, errors} = useFormik({
       initialValues:{
@@ -49,16 +43,11 @@ export const LoginForm = () =>{
             navigate('/')
             window.location.reload()
           }else {
-            Swal.fire({
-              icon: 'error',
-              title: 'Oops...',
-              text: 'Login Falled!',
-              
-            })
-          }
-        })
-      },
-    })
+              setError(true)
+          }}
+        )
+      },})
+    
     
     return (
       <form onSubmit={handleSubmit}>
@@ -86,8 +75,8 @@ export const LoginForm = () =>{
             <div className='error'>{errors.password}</div>
           ): null}
         </Box>
-        <div className='' style={{color:'#00bcd4', fontSize:'0.8rem', fontWeight:'600',marginLeft:'17px'}}>
-          Forgot your password?
+        <div className='' style={{ fontSize:'0.9rem', fontWeight:'550',marginLeft:'17px'}}>
+          <p style={{color: `${error ? 'red' : 'white'}`}}>Sai tên đăng nhập hoặc mật khẩu</p>
         </div>
         <div className='submit_login row_container'> 
           <FormGroup>

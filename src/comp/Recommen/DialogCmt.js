@@ -12,8 +12,9 @@ import CommentIcon from '@mui/icons-material/Comment';
 import {  TextField, Tooltip } from '@mui/material';
 import { Cmt } from './Cmt';
 import { Markup } from 'interweave';
+import { baseAPI } from '../../api/baseAPI';
 
-const data = "Trong hai ngày cuối tuần diễn biến thị trường có thể sẽ biến động mạnh do bối cảnh LẠM PHÁT vẫn chưa hạ nhiệt, chúng ta không thể nắm rõ trước thông tin của thị trường vậy nên chúng ta nên cẩn trọng và hạn chế giao dịch hai ngày cuối tuần nhé !<br/>Khuyến nghị giao dịch :<br/>CANH BUY XAUUSD TẠI VÙNG GIÁ 1825 - 1828<br/>Stop Loss : 1810<br/>Take Profit 1 : 1845<br/>Take Profit 2 : 1850<br/>Take Profit 3 : 1860<br/>CANH SELL XAUUSD TẠI VÙNG GIÁ 1852 - 1855<br/>Stop Loss : 1865<br/>Take Profit 1 : 1840<br/>Take Profit 2 : 1830<br/>Take Profit 3 : 1820<br/>Lưu ý : Hãy điền TP và SL một cách cụ thể trong giao dịch, và nó sẽ giúp bạn an toàn hơn trong công cuộc chinh phục thị trường tài chính<br/>Sau cùng, chúc bạn đọc một ngày làm hiệu hiệu quả và thành công !"
+const datas = "Trong hai ngày cuối tuần diễn biến thị trường có thể sẽ biến động mạnh do bối cảnh LẠM PHÁT vẫn chưa hạ nhiệt, chúng ta không thể nắm rõ trước thông tin của thị trường vậy nên chúng ta nên cẩn trọng và hạn chế giao dịch hai ngày cuối tuần nhé !<br/>Khuyến nghị giao dịch :<br/>CANH BUY XAUUSD TẠI VÙNG GIÁ 1825 - 1828<br/>Stop Loss : 1810<br/>Take Profit 1 : 1845<br/>Take Profit 2 : 1850<br/>Take Profit 3 : 1860<br/>CANH SELL XAUUSD TẠI VÙNG GIÁ 1852 - 1855<br/>Stop Loss : 1865<br/>Take Profit 1 : 1840<br/>Take Profit 2 : 1830<br/>Take Profit 3 : 1820<br/>Lưu ý : Hãy điền TP và SL một cách cụ thể trong giao dịch, và nó sẽ giúp bạn an toàn hơn trong công cuộc chinh phục thị trường tài chính<br/>Sau cùng, chúc bạn đọc một ngày làm hiệu hiệu quả và thành công !"
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -55,6 +56,33 @@ BootstrapDialogTitle.propTypes = {
 export default function DialogCmt(props) {
   const [t, setT] = React.useState('')
   const [open, setOpen] = React.useState(false);
+  const [refresh, setRefresh] = React.useState(false);
+  const [data, setData] = React.useState([
+    {
+      "createdAt": "2022-07-02T10:04:57.778Z",
+      "userId": 2,
+      "postId": 1,
+      "content": "Bài viết rất hay",
+      "commentId": "1"
+     }
+  ]);
+  React.useEffect(() => {
+    baseAPI.get('/comments')
+    .then(res => {
+      setData(res.data);
+    })
+  },[refresh])
+
+  const handlePostComment = async () => {
+    await baseAPI.post('/comments', {
+        "userId": localStorage.userId,
+        "postId": props.postId,
+        "content": t,
+    })
+    setT('');
+    setRefresh(!refresh);
+  }
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -79,12 +107,12 @@ export default function DialogCmt(props) {
         <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
           <div className='row_container'>
             <img style={{width:'70px', height:'70px', borderRadius:'5px'}}
-              src='https://kenh14cdn.com/thumb_w/660/203336854389633024/2022/4/3/photo-1-164898078911925735845.jpg'></img>
+              src={props.avatar}></img>
             <div style={{marginLeft:'20px', paddingTop:'0px'}}>
               <p style={{fontSize:"1.2rem"}}>{props.title}</p>
-              <p style={{color:'blue', fontSize:'0.9rem', fontWeight:'600'}}>Vàng / Đô la Mỹ (OANDA:XAUUSD)</p>
+              <p style={{color:'blue', fontSize:'0.9rem', fontWeight:'600'}}>{props.tag}</p>
               <div className='row_container'>
-                <p style={{fontSize:'0.85rem',fontWeight:'550'}}>Hoang Anh</p>
+                <p style={{fontSize:'0.85rem',fontWeight:'550'}}>{props.name}</p>
                 <p className='chip'>PREMIUM</p>
                 <p style={{color:'gray', fontSize:'0.85rem', fontWeight:'550',marginLeft:'20px'}}>{props.time.split('T')[0]}</p>
               </div>
@@ -96,7 +124,7 @@ export default function DialogCmt(props) {
           <img style={{width:'100%', height:'400px',margin:'15px 0px'}} 
             src={props.image}></img>
           <Typography gutterBottom>
-            <Markup content={data}></Markup>
+            <Markup content={datas}></Markup>
           </Typography>          
         </DialogContent>
         <DialogContent dividers sx={{width:'30%'}}>
@@ -107,11 +135,12 @@ export default function DialogCmt(props) {
             value={t}
             onChange={(e) => setT(e.target.value)}
           />
-          <Button variant="contained" size='small' onClick={() => console.log(t)}>Đăng bình luận</Button>
-          <Cmt name='Hoang Duy' text='Hello anh em' 
-            time='10 giờ trước' img='https://play-lh.googleusercontent.com/8ddL1kuoNUB5vUvgDVjYY3_6HwQcrg1K2fd_R8soD-e2QYj8fT9cfhfh3G0hnSruLKec'></Cmt>
-          <Cmt name='Nguyen Anh' text='Bài viết rất hay' 
-            time='2 giờ trước' img='https://i.ytimg.com/vi/TqHYZE4k8Uc/maxresdefault.jpg'></Cmt>
+          <Button variant="contained" size='small' onClick={handlePostComment}>Đăng bình luận</Button>
+          {data.filter(e => {return e.postId == props.postId}).map(e => (
+            <Cmt userId={e.userId} content={e.content} createdAt={e.createdAt}></Cmt>            
+          ))
+
+          }
         </DialogContent>
         </DialogContent>
       </BootstrapDialog>
