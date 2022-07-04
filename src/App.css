@@ -713,7 +713,10 @@ font-size:1.5rem;
   white-space: normal; 
   overflow:hidden;
   text-overflow: ellipsis;
-  height: 100px;
+  height: 105px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  font-family: 'Roboto', sans-serif;
 }
 
 .chip {

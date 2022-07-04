@@ -14,8 +14,6 @@ import { Cmt } from './Cmt';
 import { Markup } from 'interweave';
 import { baseAPI } from '../../api/baseAPI';
 
-const datas = "Trong hai ngày cuối tuần diễn biến thị trường có thể sẽ biến động mạnh do bối cảnh LẠM PHÁT vẫn chưa hạ nhiệt, chúng ta không thể nắm rõ trước thông tin của thị trường vậy nên chúng ta nên cẩn trọng và hạn chế giao dịch hai ngày cuối tuần nhé !<br/>Khuyến nghị giao dịch :<br/>CANH BUY XAUUSD TẠI VÙNG GIÁ 1825 - 1828<br/>Stop Loss : 1810<br/>Take Profit 1 : 1845<br/>Take Profit 2 : 1850<br/>Take Profit 3 : 1860<br/>CANH SELL XAUUSD TẠI VÙNG GIÁ 1852 - 1855<br/>Stop Loss : 1865<br/>Take Profit 1 : 1840<br/>Take Profit 2 : 1830<br/>Take Profit 3 : 1820<br/>Lưu ý : Hãy điền TP và SL một cách cụ thể trong giao dịch, và nó sẽ giúp bạn an toàn hơn trong công cuộc chinh phục thị trường tài chính<br/>Sau cùng, chúc bạn đọc một ngày làm hiệu hiệu quả và thành công !"
-
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
     padding: theme.spacing(2),
@@ -124,7 +122,7 @@ export default function DialogCmt(props) {
           <img style={{width:'100%', height:'400px',margin:'15px 0px'}} 
             src={props.image}></img>
           <Typography gutterBottom>
-            <Markup content={datas}></Markup>
+            <Markup content={props.content}></Markup>
           </Typography>          
         </DialogContent>
         <DialogContent dividers sx={{width:'30%'}}>

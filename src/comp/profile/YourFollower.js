@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { baseAPI } from '../../api/baseAPI';
 import { Follower } from './Follower';
 
 export const YourFollower = (props) => {
     let params = useParams();
+    const [refresh, setRefresh] = useState(false)
 
     const [data, setData] = React.useState([
         {
@@ -20,7 +21,7 @@ export const YourFollower = (props) => {
             .then(res => {
                 setData(res.data);
         })
-    }, [])
+    }, [refresh])
     const checkFollow = (x) => {
         if(data.filter(e => e.followed == x && e.follower == localStorage.userId).length === 0)
             return false
@@ -32,7 +33,7 @@ export const YourFollower = (props) => {
     return (
         <div style={{display:'flex', flexWrap:'wrap'}}>
             {data.filter(e => e.followed == params.id).map(e => (
-                <Follower userId={e.follower} follow={checkFollow(e.follower)} id={e.id}></Follower>
+                <Follower userId={e.follower} follow={checkFollow(e.follower)} id={e.id} refresh={refresh} setRefresh={setRefresh}></Follower>
             ))}
         </div>
     )
@@ -40,7 +41,7 @@ export const YourFollower = (props) => {
     return (
         <div style={{display:'flex', flexWrap:'wrap'}}>
             {data.filter(e => e.follower == params.id).map(e => (
-                <Follower userId={e.followed} follow={true} id={e.id}></Follower>
+                <Follower userId={e.followed} follow={true} id={e.id} refresh={refresh} setRefresh={setRefresh}></Follower>
             ))}
         </div>
     )

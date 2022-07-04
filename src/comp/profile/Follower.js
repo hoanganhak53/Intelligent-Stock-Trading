@@ -35,6 +35,7 @@ React.useEffect(() => {
   const handleUnfollow = async () => {
     await baseAPI.delete(`/follow/${props.id}`)
     setFollow(!follow);
+    props.setRefresh(!props.refresh)
   }
   const handleFollow = async () => {
     await baseAPI.post('follow', {
@@ -42,6 +43,7 @@ React.useEffect(() => {
       "followed": props.userId,
     })
     setFollow(!follow);
+    props.setRefresh(!props.refresh)
   }
   return (
     <Stack direction='row' alignItems='center' sx={{padding:'15px 30px', marginTop:'20px', width:'400px', marginRight:'70px',

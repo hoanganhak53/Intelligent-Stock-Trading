@@ -1,8 +1,9 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 import { baseAPI } from '../../api/baseAPI';
 
 export const Cmt = (prop) => {
-
+    const navigate = useNavigate()
     const [data, setData] = React.useState(
         {
             "username": "hoanganh",
@@ -29,7 +30,7 @@ export const Cmt = (prop) => {
         <div style={{ marginTop: '20px' }}>
             <div className='row_container'>
                 <img style={{ width: '32px', height: '32px', borderRadius: '5px', marginRight: '10px' }}
-                    src={data.avatar}
+                    src={data.avatar} onClick={() => {navigate(`/profile/${prop.userId}`); window.location.reload()}}
                 ></img>
                 <div style={{ marginLeft: '8px' }}>
                     <div className='row_container'>

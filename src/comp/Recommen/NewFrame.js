@@ -10,8 +10,11 @@ import DialogCmt from './DialogCmt';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import { IconButton } from '@mui/material';
 import { baseAPI } from '../../api/baseAPI';
+import { Markup } from 'interweave';
+import { useNavigate } from 'react-router-dom';
 
 export function NewFrame(props) {
+  const navigate = useNavigate()
   const [isLike,setLike] = React.useState(false);
   const [numLike,setNumLike] = React.useState(Number(props.like));
 
@@ -55,7 +58,7 @@ export function NewFrame(props) {
         image={props.image}
         alt="Paella dish"
       />
-    <div style={{marginTop:'10px', alignItems:'center'}} className='row_container'>
+    <div style={{marginTop:'10px', alignItems:'center'}} className='row_container' onClick={() => navigate(`/profile/${props.userId}`)}>
         <img style={{width:'36px', height:'36px', borderRadius:'10px'}}
          src={data.avatar}></img>
         <p style={{fontWeight:'550', paddingLeft:'10px'}}>{data.name}</p>
@@ -64,7 +67,7 @@ export function NewFrame(props) {
 
       <div style={{marginTop:'15px', marginBottom:'5px'}}>
         <Typography variant="body2" color="text.secondary" className='text_new_ideal'>
-        {props.content}
+          <Markup content={props.content} className='text_new_ideal'></Markup>
         </Typography>
       </div>
       <CardActions disableSpacing>
@@ -84,9 +87,8 @@ export function NewFrame(props) {
             ><IconButton><ShareIcon sx={{color:'gray'}}></ShareIcon></IconButton></FacebookShareButton>
             </Tooltip>
             <DialogCmt title={props.title} content={props.content}  postId={props.postId} name={data.name} avatar={data.avatar}
-              image={props.image} userId={props.userId} time={props.time}/>     
+              image={props.image} userId={props.userId} time={props.time} tag={props.tag}/>     
         </div>
-
       </CardActions>
     </Card>
   );

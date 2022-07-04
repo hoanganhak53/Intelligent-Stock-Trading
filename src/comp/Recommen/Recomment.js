@@ -2,6 +2,7 @@ import { Divider } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { baseAPI } from '../../api/baseAPI'
 import { NewFrame } from './NewFrame'
+import PushRecomment from './PushRecomment'
 
 export const Recomment = () => {
   const [data, setData] = useState([
@@ -30,9 +31,10 @@ export const Recomment = () => {
             <p style={{fontSize:'2rem', fontWeight:'600'}}>PHÂN TÍCH XU HƯỚNG</p>
         </div>
         <Divider variant='fullWidth'/>
+        <PushRecomment/>
         <div style={{margin:'30px 15%',display:'flex', flexWrap:'wrap'}}>
           {data.map(e => (
-            <NewFrame title={e.title} content={e.content} like={e.like} tag={e.tag}
+            <NewFrame title={e.title} content={e.content} like={e.like} tag={e.tag} 
               image={e.image} userId={e.userId} time={e.createAt} postId={e.postId}/>
           ))}
         </div>
