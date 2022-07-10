@@ -72,12 +72,12 @@ export const TableUser = () => {
     }, [])
 
     return (
-        <div style={{ height: 400, width: '100%' }}>
+        <div style={{ height: 640, width: '100%', margin: '50px 5%' }}>
             <DataGrid getRowId={(row) => row.userId}
                 rows={data}
                 columns={columns}
-                pageSize={5}
-                rowsPerPageOptions={[5]}
+                pageSize={10}
+                rowsPerPageOptions={[10]}
             />
         </div>
     );

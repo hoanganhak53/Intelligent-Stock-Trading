@@ -508,10 +508,15 @@ body {
 }
 
 
-
+.forgotPassword {
+  color: rgb(77, 144, 170);
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-left: 40px;
+}
 
 .footer{
-  background-color: #222;
+  background-color: #1d1d1d;
   padding:4rem;
   display: grid;
   grid-template-columns: repeat(auto-fit,minmax(200px,1fr));

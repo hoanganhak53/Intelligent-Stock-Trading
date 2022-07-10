@@ -158,7 +158,7 @@ export const Avata = () => {
           </MenuItem>
           {localStorage.role === '0' &&
             <MenuItem onClick={() => {
-              navigate('admin');
+              navigate('admin/posts');
             }}>
               <ListItemIcon>
                 <AdminPanelSettingsIcon fontSize="small" />

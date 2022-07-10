@@ -1,11 +1,12 @@
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { useNavigate } from 'react-router-dom';
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import axios from 'axios';
 import HttpsRoundedIcon from '@mui/icons-material/HttpsRounded';
 import EmailIcon from '@mui/icons-material/Email';
-import { Checkbox, FormGroup, TextField, Box, FormControlLabel } from '@mui/material';
+import { Checkbox, FormGroup, TextField, Box, FormControlLabel, Stack } from '@mui/material';
+import emailjs from '@emailjs/browser';
 
 const userSchema = yup.object().shape({
   userNameOrEmailAddress: yup.string().min(5, 'Username should be longer than 5 characters')
@@ -18,7 +19,8 @@ const iconSX = { color: 'action.active', mr: 1, my: 0.5, marginTop:'20px' }
 const labelCheckBoxSX = { '& .MuiSvgIcon-root': { fontSize: 25, color:'#3f51b5' }}
 
 export const LoginForm = () =>{
-    const [error, setError] = useState(false);
+  const [openSnackBar, setOpenSnackBar] = React.useState(false);
+  const [content, setContent] = React.useState('Sai tên đăng nhập hoặc mật khẩu!!')
     const navigate = useNavigate();
     const {handleSubmit, handleChange, values, touched, errors} = useFormik({
       initialValues:{
@@ -43,11 +45,22 @@ export const LoginForm = () =>{
             navigate('/')
             window.location.reload()
           }else {
-              setError(true)
+              setOpenSnackBar(true)
           }}
         )
       },})
-    
+      const form = useRef();
+      const sendEmail = (e) => {
+        setContent('Mật khẩu mới đã được gửi đến email của bạn')
+        setOpenSnackBar(true)
+        e.preventDefault();
+        emailjs.sendForm('email', 'template_l1tmjnm', form.current, 'SiziTCVKwe7qKl1Bd')
+          .then((result) => {
+              console.log(result.text);
+          }, (error) => {
+              console.log(error.text);
+          });
+      }
     
     return (
       <form onSubmit={handleSubmit}>
@@ -55,7 +68,7 @@ export const LoginForm = () =>{
         <Box sx={boxSX}>
           <Box id='Box'>
             <EmailIcon sx={iconSX} />
-            <TextField label="User name or email" variant="standard" className='form__group'                 
+            <TextField label="Username" variant="standard" className='form__group'                 
               onChange={handleChange} value={values.userNameOrEmailAddress} 
               id="userNameOrEmailAddress" name="userNameOrEmailAddress" type="text"/>
           </Box>
@@ -75,20 +88,21 @@ export const LoginForm = () =>{
             <div className='error'>{errors.password}</div>
           ): null}
         </Box>
-        <div className='' style={{ fontSize:'0.9rem', fontWeight:'550',marginLeft:'17px'}}>
-          <p style={{color: `${error ? 'red' : 'white'}`}}>Sai tên đăng nhập hoặc mật khẩu</p>
-        </div>
+        <form ref={form} onSubmit={sendEmail}>
+        <input type="submit" value="Quên mật khẩu" className='forgotPassword'/>
+        </form>
         <div className='submit_login row_container'> 
           <FormGroup>
             <FormControlLabel control={
               <Checkbox value={values.rememberClient} onChange={handleChange} name='rememberClient'/>
-            } label="Remember me"
+            } label="Ghi nhớ đăng nhập"
               sx={labelCheckBoxSX} />
           </FormGroup>         
           <div>
-            <button type="submit">Log in</button>                
+            <button type="submit">Đăng nhập</button>                
           </div>
         </div>
+        <Stack content={content} state='error' open={openSnackBar} setOpen={setOpenSnackBar}></Stack>
       </form>          
     )
 }

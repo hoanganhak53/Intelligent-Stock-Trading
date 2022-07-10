@@ -9,7 +9,6 @@ import Money from './comp/Money';
 import { SettingProfile } from './comp/settingProfile/SettingProfile';
 import { Recomment } from './comp/Recommen/Recomment';
 import { Profile } from './comp/profile/Profile';  
-import { MyAdmin } from './comp/admin/MyAdmin';
   
 const App = () => {
 	return (
@@ -23,7 +22,6 @@ const App = () => {
 			<Route path="setting_profile/*" element={<SettingProfile/>} />
 			<Route path={`profile/:id`} element={<Profile/>} />
 			<Route path="y_tuong/*" element={<Recomment/>} />
-			<Route path="admin/*" element={<MyAdmin/>} />
 		</Routes>
 		</div>
 		<FooterComp />

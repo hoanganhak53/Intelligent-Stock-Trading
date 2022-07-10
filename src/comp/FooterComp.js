@@ -13,9 +13,6 @@ const FooterComp = () => {
 			<div className="footer_comp">
 				<h1>About Us</h1>
 				<p>Careers</p>
-				<p>Bissiness Contact</p>
-				<p>Community</p>
-				<p>Binance Blog</p>
 				<p>Terms</p>
 				<p>Privacy</p>
 				<p>Announcements</p>
@@ -27,9 +24,6 @@ const FooterComp = () => {
 				<p>Careers</p>
 				<p>Bissiness Contact</p>
 				<p>Community</p>
-				<p>Binance Blog</p>
-				<p>Terms</p>
-				<p>Privacy</p>
 				<p>Announcements</p>
 				<p>News</p>
 				<p>Notices</p>
@@ -37,9 +31,6 @@ const FooterComp = () => {
 			<div className="footer_comp">
 				<h1>Service</h1>
 				<p>Downloads</p>
-				<p>Bissiness Contact</p>
-				<p>Community</p>
-				<p>Binance Blog</p>
 				<p>Terms</p>
 				<p>Privacy</p>
 				<p>Announcements</p>
@@ -51,9 +42,6 @@ const FooterComp = () => {
 				<p>Give Us Feedback</p>
 				<p>Bissiness Contact</p>
 				<p>Community</p>
-				<p>Binance Blog</p>
-				<p>Terms</p>
-				<p>Privacy</p>
 				<p>Announcements</p>
 				<p>News</p>
 				<p>Notices</p>
@@ -63,9 +51,6 @@ const FooterComp = () => {
 				<p>Buy BNB</p>
 				<p>Buy BUSD</p>
 				<p>Community</p>
-				<p>Binance Blog</p>
-				<p>Terms</p>
-				<p>Privacy</p>
 				<p>Announcements</p>
 				<p>News</p>
 				<p>Notices</p>
