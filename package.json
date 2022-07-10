@@ -22,6 +22,8 @@
 
     "@mui/material": "^5.8.3",
 
+    "@mui/x-data-grid": "^5.13.0",
+
     "@reduxjs/toolkit": "^1.8.1",
 
     "@testing-library/jest-dom": "^5.11.4",
@@ -40,7 +42,11 @@
 
     "node-sass": "^7.0.1",
 
+    "ra-data-json-server": "^4.2.1",
+
     "react": "^17.0.2",
+
+    "react-admin": "^4.2.2",
 
     "react-dom": "^17.0.2",
 

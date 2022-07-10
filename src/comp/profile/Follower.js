@@ -15,7 +15,7 @@ export const Follower = (props) => {
       "address": "Ha Noi Viet Nam",
       "phoneNumber": "phoneNumber 1",
       "name": "Hoang Anh",
-      "role": false,
+      "role": 0,
       "followers": [],
       "hadFollowered": [],
       "about": "about 1",
@@ -39,7 +39,7 @@ React.useEffect(() => {
   }
   const handleFollow = async () => {
     await baseAPI.post('follow', {
-      "follower": localStorage.userId,
+      "follower": Number(localStorage.userId),
       "followed": props.userId,
     })
     setFollow(!follow);
@@ -51,7 +51,7 @@ React.useEffect(() => {
       <Stack direction='row' alignItems='center' onClick={() => {navigate(`/profile/${props.userId}`); window.location.reload()}}>
         <img style={{width:'64px', height:'64px', borderRadius:'8px'}} src={data.avatar}></img>
         <b style={{paddingLeft:'10px', fontSize:'1rem'}}>{data.name}</b>
-          {data.role && <p className='chip'>PREMIUM</p>}
+          {data.role === 0 && <p className='chip'>PREMIUM</p>}
       </Stack>
         {follow ?
         <Button variant='outlined' sx={{ textTransform:'none'}} onClick={handleUnfollow}> Đang theo dõi</Button>

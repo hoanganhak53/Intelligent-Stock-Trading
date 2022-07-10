@@ -14,6 +14,11 @@ import FormatItalicIcon from '@mui/icons-material/FormatItalic';
 import LinkIcon from '@mui/icons-material/Link';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import { baseAPI } from '../../api/baseAPI';
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     '& .MuiDialogContent-root': {
@@ -59,9 +64,15 @@ export default function PushRecomment() {
     const [image, setImage] = React.useState('');
     const [content, setContent] = React.useState('');
     const [tag, setTag] = React.useState('');
+    const [role, setRole] = React.useState(4);
+    const [openSnackBar, setOpenSnackBar] = React.useState(false);
+      
+    const handleChange = (event) => {
+        setRole(event.target.value);
+    };
 
     const handleClickOpen = () => {
-        if(localStorage.role === 'true'){
+        if(localStorage.role === '0'){
             setOpen(true)
         }
         else{
@@ -72,7 +83,6 @@ export default function PushRecomment() {
     const handleClose = () => {
         setOpen(false);
     }
-    const [openSnackBar, setOpenSnackBar] = React.useState(false);
 
     const handleCloseSB = (event, reason) => {
       if (reason === 'clickaway') {
@@ -91,7 +101,8 @@ export default function PushRecomment() {
                 image,
                 content: text,
                 like: 0,
-                tag
+                tag,
+                role: Number(role)
             })
             setOpen(false);
             window.location.reload()            
@@ -115,10 +126,33 @@ export default function PushRecomment() {
                 </BootstrapDialogTitle>
                 <DialogContent dividers>
                     <div style={{padding:'10px 20px'}}>
-                        <p style={{margin:'5px 0px'}}>Tiêu đề và Mô tả Ý tưởng</p>
-                        <TextField size="small" sx={{width:'850px'}} onChange={(e) => setTitle(e.target.value)}></TextField>
-                        <Stack direction='row'>
-                            <div style={{marginRight:'50px'}}>
+                        <Stack direction='row' justifyContent='space-between'>
+                            <div>
+                                <p style={{margin:'5px 0px'}}>Tiêu đề và Mô tả Ý tưởng</p>
+                                <TextField size="small" sx={{width:'620px'}} onChange={(e) => setTitle(e.target.value)}></TextField>                                
+                            </div>
+                            <div>
+                                <p style={{color:'transparent', margin:'5px 0px'}}>d</p>
+                                <Box sx={{ width: 190 }}>
+                                <FormControl fullWidth size='small'>
+                                    <InputLabel id="demo-simple-select-label">Nhóm người dùng</InputLabel>
+                                    <Select
+                                    labelId="demo-simple-select-label"
+                                    value={role}
+                                    label="Nhóm người dùng"
+                                    onChange={handleChange}
+                                    >
+                                    <MenuItem value={3}>Tất cả</MenuItem>
+                                    <MenuItem value={2}>Người dùng cấp 1</MenuItem>
+                                    <MenuItem value={1}>Người dùng cấp 2</MenuItem>
+                                    <MenuItem value={0}>Chuyên gia</MenuItem>
+                                    </Select>
+                                </FormControl>
+                                </Box>                                
+                            </div>
+                        </Stack>
+                        <Stack direction='row' justifyContent='space-between'>
+                            <div>
                                 <p style={{margin:'5px 0px'}}>Đường dẫn ảnh</p>
                                 <TextField size="small" sx={{width:'400px'}} onChange={(e) => setImage(e.target.value)}></TextField>                                
                             </div>
@@ -143,7 +177,7 @@ export default function PushRecomment() {
                             </IconButton>
                         </Stack>
                         <TextareaAutosize value={content} onChange={(e) => {setContent(e.target.value)}}
-                            style={{whiteSpace:'pre-line', width:'850px', padding:'5px', fontSize:'1rem'}} maxWidth minRows={10}>
+                            style={{whiteSpace:'pre-line', width:'875px', padding:'5px', fontSize:'1rem'}} maxWidth minRows={10}>
                         </TextareaAutosize>                        
                     </div>
 
@@ -156,7 +190,7 @@ export default function PushRecomment() {
             </BootstrapDialog>
             <Snackbar open={openSnackBar} autoHideDuration={6000} onClose={handleCloseSB}>
                 <Alert onClose={handleCloseSB} severity="error" sx={{ width: '100%' }}>
-                {localStorage.role == true ? "Hãy điền đủ nội dung" : "Tài khoản của bạn không được phép đăng bài"}
+                {Number(localStorage.role) === 0 ? "Hãy điền đủ nội dung" : "Tài khoản của bạn không được phép đăng bài"}
                 </Alert>
             </Snackbar>
         </div>

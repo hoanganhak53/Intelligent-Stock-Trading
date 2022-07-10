@@ -8,6 +8,7 @@ import { Ideal } from './Ideal';
 import { Follower } from './Follower';
 import { YourFollower } from './YourFollower';
 import { useParams } from 'react-router-dom';
+import { FollowPost } from './FollowPost';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -57,6 +58,7 @@ export function BodyProfile() {
           <Tab label="Ý tưởng" {...a11yProps(0)} />
           <Tab label="Người theo dõi" {...a11yProps(1)} />
           {params.id == localStorage.userId &&<Tab label="Đang theo dõi" {...a11yProps(2)} />}
+          {params.id == localStorage.userId &&<Tab label="Bài viết" {...a11yProps(3)} />}
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}  style={{margin:'0px 12%'}}>
@@ -68,6 +70,11 @@ export function BodyProfile() {
       {params.id == localStorage.userId &&
         <TabPanel value={value} index={2}  style={{margin:'0px 12%'}}>
           <YourFollower  yourFollower={false}></YourFollower>
+        </TabPanel>      
+      }
+      {params.id == localStorage.userId &&
+        <TabPanel value={value} index={3}  style={{margin:'0px 12%'}}>
+          <FollowPost/>
         </TabPanel>      
       }
     </Box>

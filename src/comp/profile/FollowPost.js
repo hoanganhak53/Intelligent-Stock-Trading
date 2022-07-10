@@ -3,7 +3,9 @@ import { useParams } from 'react-router-dom';
 import { baseAPI } from '../../api/baseAPI';
 import { NewFrame } from '../Recommen/NewFrame';
 
-export const Ideal = () => {
+//0 all 1 nguoi dung cap 1 2 nguoi dung cap 2
+
+export const FollowPost = () => {
     let params = useParams();
     const [data, setData] = useState([
         {
@@ -18,16 +20,22 @@ export const Ideal = () => {
             "role": 0
         }
     ]);
+
     useEffect(async () => {
+        let dataFollow;
+        await baseAPI.get(`/follow`)
+        .then(res => {
+            dataFollow = res.data.filter(e => e.follower == localStorage.userId);
+        })
         await baseAPI.get('/posts')
         .then(res => {
-            setData(res.data);
+            setData(res.data.filter(e => dataFollow.find(x => e.userId == x.followed)));
         })
     }, [])
     return (
         <div>
             <div style={{ margin: '30px 0px', display: 'flex', flexWrap: 'wrap' }}>
-                {data.filter(e => e.role >= Number(localStorage.role)).filter(e => e.userId == params.id).map(e => (
+                {data.filter(e => e.role >= Number(localStorage.role)).map(e => (
                     <NewFrame title={e.title} content={e.content} like={e.like} tag={e.tag}
                     image={e.image} userId={e.userId} time={e.createAt} postId={e.postId}/>
                 ))}

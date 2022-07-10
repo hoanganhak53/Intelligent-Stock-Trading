@@ -20,13 +20,14 @@ export const HeaderProfile = () => {
     "address": "Ha Noi Viet Nam",
     "phoneNumber": "phoneNumber 1",
     "name": "Hoang Anh",
-    "role": false,
+    "role": 0,
     "followers": [],
     "hadFollowered": [],
     "about": "about 1",
     "numPost": 15,
     "createdAt": "2022-07-02T15:06:11.697Z",
     "numFollower": 37,
+    "like": 1,
     "userId": "1"
   }])
   const [followData, setFollowData] = React.useState([
@@ -84,7 +85,7 @@ export const HeaderProfile = () => {
       <div style={{ marginLeft: '40px' }}>
         <div className='row_container' style={{ alignItems: 'center' }}>
           <p style={{ fontSize: '1.75rem', fontWeight: '600' }}>{data.name}</p>
-          {data.role && <p className='chip' style={{ fontSize: '0.8rem', padding: '4px 8px' }}>PREMIUM</p>}
+          {data.role === 0 && <p className='chip' style={{ fontSize: '0.8rem', padding: '4px 8px' }}>PREMIUM</p>}
           {params.id !== localStorage.userId && <div><Button
             sx={{ textTransform: 'none', marginLeft: '450px' }} variant='outlined'
             onClick={checkFollow() ? handleUnfollow : handleFollow}
@@ -104,7 +105,7 @@ export const HeaderProfile = () => {
           <Tooltip aria-label="add to favorites" sx={{ color: 'gray', marginLeft: '15px', marginRight: '100px' }} title="Ý tưởng đã xuất bản" placement="top">
             <AutoStoriesIcon></AutoStoriesIcon>
           </Tooltip>
-          <p style={{ fontSize: '1.3rem' }}>142</p>
+          <p style={{ fontSize: '1.3rem' }}>{data.like}</p>
           <Tooltip aria-label="add to favorites" sx={{ color: 'gray', marginLeft: '15px', marginRight: '100px' }} title="Số lượt thích" placement="top">
             <ThumbUpIcon></ThumbUpIcon>
           </Tooltip>

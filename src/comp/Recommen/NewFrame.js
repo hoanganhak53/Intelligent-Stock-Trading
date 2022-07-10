@@ -27,7 +27,7 @@ export function NewFrame(props) {
         "address": "Viet Nam",
         "phoneNumber": "091239412",
         "name": "Hoang Anh",
-        "role": false,
+        "role": 0,
         "followers": [],
         "hadFollowered": [],
         "about": "khong co gi ca",

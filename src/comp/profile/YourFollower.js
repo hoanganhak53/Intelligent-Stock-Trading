@@ -32,7 +32,7 @@ export const YourFollower = (props) => {
     if(props.yourFollower)
     return (
         <div style={{display:'flex', flexWrap:'wrap'}}>
-            {data.filter(e => e.followed == params.id).map(e => (
+            {data.filter(e => e.followed == Number(params.id)).map(e => (
                 <Follower userId={e.follower} follow={checkFollow(e.follower)} id={e.id} refresh={refresh} setRefresh={setRefresh}></Follower>
             ))}
         </div>
@@ -40,7 +40,7 @@ export const YourFollower = (props) => {
     else 
     return (
         <div style={{display:'flex', flexWrap:'wrap'}}>
-            {data.filter(e => e.follower == params.id).map(e => (
+            {data.filter(e => e.follower == Number(params.id)).map(e => (
                 <Follower userId={e.followed} follow={true} id={e.id} refresh={refresh} setRefresh={setRefresh}></Follower>
             ))}
         </div>
