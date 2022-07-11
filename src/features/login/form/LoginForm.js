@@ -5,7 +5,7 @@ import React from 'react'
 import axios from 'axios';
 import HttpsRoundedIcon from '@mui/icons-material/HttpsRounded';
 import EmailIcon from '@mui/icons-material/Email';
-import { Checkbox, FormGroup, TextField, Box, FormControlLabel, Stack } from '@mui/material';
+import { Checkbox, FormGroup, TextField, Box, FormControlLabel, Stack, Button } from '@mui/material';
 
 const userSchema = yup.object().shape({
   userNameOrEmailAddress: yup.string().min(5, 'Username should be longer than 5 characters')
@@ -74,7 +74,7 @@ export const LoginForm = () =>{
             <div className='error'>{errors.password}</div>
           ): null}
         </Box>
-        <Link to='/register'>Quên mật khẩu</Link>
+        <Link to='forgotpassword' className='forgotPassword'>Quên mật khẩu</Link>
         <div className='submit_login row_container'> 
           <FormGroup>
             <FormControlLabel control={
@@ -83,7 +83,7 @@ export const LoginForm = () =>{
               sx={labelCheckBoxSX} />
           </FormGroup>         
           <div>
-            <button type="submit">Đăng nhập</button>                
+            <Button sx={{textDecoration:'none'}} type="submit" variant='contained'>Đăng nhập</Button>                
           </div>
         </div>
         <Stack content='Sai tên đăng nhập hoặc mật khẩu!!' state='error' open={openSnackBar} setOpen={setOpenSnackBar}></Stack>

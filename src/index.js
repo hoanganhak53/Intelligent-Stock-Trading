@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { MyAdmin } from './comp/admin/MyAdmin';
 import { Register } from './comp/register/Register';
+import Login from './features/login/Login';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -14,13 +15,10 @@ ReactDOM.render(
          <Route path="*" element={<App/>} />
          <Route path="admin/*" element={<MyAdmin/>} />
          <Route path="register/*" element={<Register />} />
+         <Route path="login/*" element={<Login />} />
        </Routes>   
        </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();

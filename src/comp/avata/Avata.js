@@ -8,28 +8,16 @@ import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import PersonAdd from '@mui/icons-material/PersonAdd';
 import { AccountCircle } from '@material-ui/icons';
-import { Dialog, Typography } from '@material-ui/core';
-import CloseIcon from '@mui/icons-material/Close';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import Login from '../../features/login/Login';
 import { Logout } from '@mui/icons-material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
-import { DangKy } from '../../features/login/DangKy';
 import { useNavigate } from 'react-router-dom';
 import SettingsIcon from '@mui/icons-material/Settings';
 
 export const Avata = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
-  const [isOpen, setOpen] = React.useState(false);
-  const [dangNhap, setDangNhap] = React.useState(false);
   const navigate = useNavigate()
-  const handleOpen = () => {
-    setOpen(true)
-    console.log(isOpen)
-  }
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -95,13 +83,13 @@ export const Avata = () => {
           transformOrigin={{ horizontal: 'right', vertical: 'top' }}
           anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
         >
-          <MenuItem onClick={() => { setOpen(true); setDangNhap(false) }}>
+          <MenuItem onClick={() => { navigate('/register') }}>
             <ListItemIcon>
               <PersonAdd fontSize="small" />
             </ListItemIcon>
             Đăng ký
           </MenuItem>
-          <MenuItem onClick={() => { handleOpen(); setDangNhap(true) }}>
+          <MenuItem onClick={() => { navigate('/login') }}>
             <ListItemIcon>
               <AccountCircle fontSize="small" />
             </ListItemIcon>
@@ -179,25 +167,6 @@ export const Avata = () => {
         </Menu>
         )
       }
-
-      <Dialog open={isOpen} onClose={() => setOpen(false)} className='dialog_login' fullScreen>
-        <AppBar sx={{ position: 'absolute' }}>
-          <Toolbar>
-            <IconButton
-              edge="start"
-              color="inherit"
-              onClick={() => setOpen(false)}
-              aria-label="close"
-            >
-              <CloseIcon />
-            </IconButton>
-            <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-            </Typography>
-          </Toolbar>
-        </AppBar>
-        {dangNhap ? <Login /> : <DangKy></DangKy>}
-
-      </Dialog>
     </React.Fragment>
   )
 }

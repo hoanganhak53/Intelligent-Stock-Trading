@@ -11,14 +11,14 @@ import axios from 'axios';
 
 
 const userSchema = yup.object().shape({
-  userNameOrEmailAddress: yup.string().min(5, 'Username should be longer than 5 characters')
-    .max(32,'Username should be shorter than 32 characters').required('Required'),
-  password: yup.string().min(6, 'Password should be longer than 6 characters').required('Required'),
+  userNameOrEmailAddress: yup.string().min(5, 'Username phải lớn hơn 5 ký tự')
+    .max(32,'Username phải nhỏ hơn 32 ký tự').required('Nhập thiếu thông tin'),
+  password: yup.string().min(6, 'Password phải lớn hơn 6 ký tự').required('Nhập thiếu thông tin'),
   password2: yup.string().when("password", {
     is: val => (val && val.length > 0 ? true : false),
     then: yup.string().oneOf(
       [yup.ref("password")],
-      "Both password need to be the same"
+      "Mật khẩu không khớp"
     )})
 });
 
@@ -36,35 +36,34 @@ export const DangKyForm = () =>{
       },
       validationSchema: userSchema,
       onSubmit:async () => {
-        await axios.post('https://62ba7bf7573ca8f832856dda.mockapi.io/api/IST/user', {
-          "username": values.userNameOrEmailAddress,
-          "password": values.password,
-          "avatar": 'https://a.wattpad.com/useravatar/HnNguynThNgc1.256.347833.jpg',
-          "link": values.userNameOrEmailAddress,
-          "address": "US",
-          "phoneNumber": "000000000",
-          "name": values.userNameOrEmailAddress,
-          "role": false
-        }).then(res => {
-          const data = res.data;
-          localStorage.setItem('userId', data.userId)
-          localStorage.setItem('role', data.role)
-          localStorage.setItem('login', true)     
-          navigate('/');
-          window.location.reload();
-        })
+        // await axios.post('https://62ba7bf7573ca8f832856dda.mockapi.io/api/IST/user', {
+        //   "username": values.userNameOrEmailAddress,
+        //   "password": values.password,
+        //   "avatar": 'https://a.wattpad.com/useravatar/HnNguynThNgc1.256.347833.jpg',
+        //   "link": values.userNameOrEmailAddress,
+        //   "address": "US",
+        //   "phoneNumber": "000000000",
+        //   "name": values.userNameOrEmailAddress,
+        //   "role": false
+        // }).then(res => {
+        //   const data = res.data;
+        //   localStorage.setItem('userId', data.userId)
+        //   localStorage.setItem('role', data.role)
+        //   localStorage.setItem('login', true)     
+        // })
+        navigate('form_fill/basis_infor');
       },
     })
     
     return (
       <form onSubmit={handleSubmit}>
-        <h3>Register</h3>
+        <h3 style={{paddingBottom:'10px'}}>Đăng ký</h3>
         <Box sx={boxSX}>
           <Box id='Box'>
             <EmailIcon sx={iconSX} />
-            <TextField label="User name or email" variant="standard" className='form__group'                 
+            <TextField label="Username" variant="standard" className='form__group'                 
               onChange={handleChange} value={values.userNameOrEmailAddress} 
-              id="userNameOrEmailAddress" name="userNameOrEmailAddress" type="text"/>
+              id="usernameOrEmailAddress" name="userNameOrEmailAddress" type="text"/>
           </Box>
           {touched.userNameOrEmailAddress && errors.userNameOrEmailAddress ? (
             <div className='error'>{errors.userNameOrEmailAddress}</div>
@@ -95,7 +94,7 @@ export const DangKyForm = () =>{
         </Box>
         <div style={{marginLeft:'30px'}}>        
           <div>
-            <Button type='submit' variant='contained' sx={{textTransform:'none'}}>Register</Button>               
+            <Button type='submit' variant='contained' sx={{textTransform:'none'}}>Đăng ký</Button>               
           </div>
         </div>
       </form>          

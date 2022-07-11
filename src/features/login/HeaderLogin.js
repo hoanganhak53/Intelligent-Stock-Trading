@@ -1,7 +1,8 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export const HeaderLogin = () =>{
     return (
-        <h1>TradingView</h1>
+        <Link to='/' className='title'>Intelligent Stock Trading</Link>
     )
 }
