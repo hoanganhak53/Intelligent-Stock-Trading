@@ -1,12 +1,11 @@
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import { useNavigate } from 'react-router-dom';
-import React, { useRef, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom';
+import React from 'react'
 import axios from 'axios';
 import HttpsRoundedIcon from '@mui/icons-material/HttpsRounded';
 import EmailIcon from '@mui/icons-material/Email';
 import { Checkbox, FormGroup, TextField, Box, FormControlLabel, Stack } from '@mui/material';
-import emailjs from '@emailjs/browser';
 
 const userSchema = yup.object().shape({
   userNameOrEmailAddress: yup.string().min(5, 'Username should be longer than 5 characters')
@@ -20,7 +19,6 @@ const labelCheckBoxSX = { '& .MuiSvgIcon-root': { fontSize: 25, color:'#3f51b5' 
 
 export const LoginForm = () =>{
   const [openSnackBar, setOpenSnackBar] = React.useState(false);
-  const [content, setContent] = React.useState('Sai tên đăng nhập hoặc mật khẩu!!')
     const navigate = useNavigate();
     const {handleSubmit, handleChange, values, touched, errors} = useFormik({
       initialValues:{
@@ -49,18 +47,7 @@ export const LoginForm = () =>{
           }}
         )
       },})
-      const form = useRef();
-      const sendEmail = (e) => {
-        setContent('Mật khẩu mới đã được gửi đến email của bạn')
-        setOpenSnackBar(true)
-        e.preventDefault();
-        emailjs.sendForm('email', 'template_l1tmjnm', form.current, 'SiziTCVKwe7qKl1Bd')
-          .then((result) => {
-              console.log(result.text);
-          }, (error) => {
-              console.log(error.text);
-          });
-      }
+
     
     return (
       <form onSubmit={handleSubmit}>
@@ -76,7 +63,6 @@ export const LoginForm = () =>{
             <div className='error'>{errors.userNameOrEmailAddress}</div>
           ): null}
         </Box>
-        
         <Box sx={boxSX}>
           <Box id='Box'>
             <HttpsRoundedIcon sx={iconSX} />
@@ -88,9 +74,7 @@ export const LoginForm = () =>{
             <div className='error'>{errors.password}</div>
           ): null}
         </Box>
-        <form ref={form} onSubmit={sendEmail}>
-        <input type="submit" value="Quên mật khẩu" className='forgotPassword'/>
-        </form>
+        <Link to='/register'>Quên mật khẩu</Link>
         <div className='submit_login row_container'> 
           <FormGroup>
             <FormControlLabel control={
@@ -102,7 +86,7 @@ export const LoginForm = () =>{
             <button type="submit">Đăng nhập</button>                
           </div>
         </div>
-        <Stack content={content} state='error' open={openSnackBar} setOpen={setOpenSnackBar}></Stack>
+        <Stack content='Sai tên đăng nhập hoặc mật khẩu!!' state='error' open={openSnackBar} setOpen={setOpenSnackBar}></Stack>
       </form>          
     )
 }

@@ -54,7 +54,6 @@ body {
 }
 
 .submit_login {
-  margin-top: 15px;
   justify-content: space-between;
 }
 .submit_login input[type="checkbox"] {

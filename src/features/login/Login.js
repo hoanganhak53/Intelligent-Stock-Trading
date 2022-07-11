@@ -1,5 +1,4 @@
 import './Login.css';
-import { GoogleForm } from './form/GoogleForm';
 import { HeaderLogin } from './HeaderLogin';
 import { FooterLogin } from './FooterLogin';
 import { LoginForm } from './form/LoginForm';
@@ -11,7 +10,6 @@ function Login() {
           <HeaderLogin />
           <div className='form_login'>
             <LoginForm />
-            <GoogleForm />
           </div>
           <FooterLogin/>
         </div>

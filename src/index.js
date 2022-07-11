@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { MyAdmin } from './comp/admin/MyAdmin';
+import { Register } from './comp/register/Register';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -12,6 +13,7 @@ ReactDOM.render(
        <Routes>
          <Route path="*" element={<App/>} />
          <Route path="admin/*" element={<MyAdmin/>} />
+         <Route path="register/*" element={<Register />} />
        </Routes>   
        </BrowserRouter>
   </React.StrictMode>,
