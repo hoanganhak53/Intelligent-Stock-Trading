@@ -66,21 +66,21 @@ const steps = ['Thông tin cơ bản', 'Thông tin thêm', 'Ảnh đại diện'
   return (
     <div className='form_fill'>
     <Box sx={{ width: '100%' }}>
-      <Stepper activeStep={activeStep}  sx={{color:'#fff'}}>
+      <Stepper activeStep={activeStep} >
         {steps.map((label, index) => {
           const stepProps = {};
           const labelProps = {};
           if (isStepOptional(index)) {
             labelProps.optional = (
-              <Typography variant="caption" sx={{color:'#fff'}}>Tùy chọn</Typography>
+              <Typography variant="caption">Tùy chọn</Typography>
             );
           }
           if (isStepSkipped(index)) {
             stepProps.completed = false;
           }
           return (
-            <Step key={label} {...stepProps} color='#fff'>
-              <StepLabel {...labelProps} ><span style={{color: '#fff'}}>{label}</span></StepLabel>
+            <Step key={label} {...stepProps}>
+              <StepLabel {...labelProps} ><span>{label}</span></StepLabel>
             </Step>
           );
         })}
@@ -116,7 +116,7 @@ const steps = ['Thông tin cơ bản', 'Thông tin thêm', 'Ảnh đại diện'
 
             <Box sx={{ flex: '1 1 auto' }} />
             {isStepOptional(activeStep) && (
-              <Button onClick={handleSkip} sx={{ mr: 1, color:'#fff' }}>
+              <Button onClick={handleSkip} sx={{ mr: 1}}>
                 Skip
               </Button>
             )}
