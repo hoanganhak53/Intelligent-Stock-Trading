@@ -16,7 +16,7 @@ body {
   padding-bottom: 68.5px;
 }
 .login-wrapper small {
-  padding-bottom: 128px;
+  padding-bottom: 132px;
 }
 
 .form_login {
@@ -150,7 +150,7 @@ small {
   border-radius: 7px;
   background-color: #fff;
   align-items: center;
-  padding: 15px 20px;
+  padding: 20px 20px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
@@ -162,26 +162,24 @@ small {
   align-items: center;
 }
 
-.form_fill {
+.form-fill {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #fff;
-  padding: 50px 15%;
+  background-color: #242626;
 }
 
 .infor-container {
-  display: flex;
-  flex-direction: column;
-  padding: 6% 10%;
-  height: 474px;
-  background-color:#fff;
-  margin: 40px 0px;
+  background: #fff;
   border-radius: 7px;
-  border: 1px #555;
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+  padding: 30px;
+}
+.infor-container p {
+  font-size: 1.4rem;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
 .infor-container label {
-  width: 200px;
+  width: 150px;
 }

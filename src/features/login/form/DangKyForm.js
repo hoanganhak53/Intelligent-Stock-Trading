@@ -7,7 +7,7 @@ import TextField from '@mui/material/TextField';
 import { useNavigate } from 'react-router-dom';
 import React from 'react'
 import { Button } from '@mui/material';
-import axios from 'axios';
+import { baseAPI } from '../../../api/baseAPI';
 
 
 const userSchema = yup.object().shape({
@@ -36,22 +36,23 @@ export const DangKyForm = () =>{
       },
       validationSchema: userSchema,
       onSubmit:async () => {
-        // await axios.post('https://62ba7bf7573ca8f832856dda.mockapi.io/api/IST/user', {
-        //   "username": values.userNameOrEmailAddress,
-        //   "password": values.password,
-        //   "avatar": 'https://a.wattpad.com/useravatar/HnNguynThNgc1.256.347833.jpg',
-        //   "link": values.userNameOrEmailAddress,
-        //   "address": "US",
-        //   "phoneNumber": "000000000",
-        //   "name": values.userNameOrEmailAddress,
-        //   "role": false
-        // }).then(res => {
-        //   const data = res.data;
-        //   localStorage.setItem('userId', data.userId)
-        //   localStorage.setItem('role', data.role)
-        //   localStorage.setItem('login', true)     
-        // })
-        navigate('form_fill/basis_infor');
+        await baseAPI.post('/user', {
+          "username": values.userNameOrEmailAddress,
+          "password": values.password,
+          "avatar": 'https://a.wattpad.com/useravatar/HnNguynThNgc1.256.347833.jpg',
+          "link": values.userNameOrEmailAddress,
+          "address": "VN",
+          "phoneNumber": "000000000",
+          "name": values.userNameOrEmailAddress,
+          "role": 2,
+          like: 0,
+          numPost: 0,
+          numFollower: 0
+        }).then(res => {
+          const data = res.data;
+          localStorage.setItem('userId', data.userId) 
+        })
+        navigate('form_fill');
       },
     })
     

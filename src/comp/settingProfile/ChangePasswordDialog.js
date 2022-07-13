@@ -7,7 +7,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { baseAPI } from '../../api/baseAPI';
 
-export function ChangePasswordDialog() {
+export function ChangePasswordDialog(props) {
   const [open, setOpen] = React.useState(false);
   const [password, setPassword] = React.useState('');
 
@@ -22,6 +22,8 @@ export function ChangePasswordDialog() {
   const handleSave = () => {
     baseAPI.put(`user/${localStorage.userId}`, {
       password
+    }).then(() => {
+      props.setOpenSnackBar(true);
     })
     setOpen(false);
   };

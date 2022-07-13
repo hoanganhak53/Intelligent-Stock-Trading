@@ -3,33 +3,29 @@ import emailjs from '@emailjs/browser';
 import { Button, Divider, TextField } from '@mui/material';
 import { HeaderLogin } from '../HeaderLogin';
 import { useNavigate } from 'react-router-dom';
-import { Stack } from '../../../components/Stack';
 import { baseAPI } from '../../../api/baseAPI';
+import { MySnack } from '../../../components/MySnack';
 
 export const ForgotPassword = () => {
-    const [openSnackBar, setOpenSnackBar] = React.useState(false);
+    const [openSnackBar, setOpenSnackBar] = React.useState(true);
     const navigate = useNavigate()
     const form = useRef();
     const [email, setEmail] = useState('')
     const newPassword = Math.random().toString(36).slice(2)
-    const sendEmail = (e) => {
-        // e.preventDefault();
-        // emailjs.sendForm('service_w9um9sn', 'template_l1tmjnm', form.current, 'SiziTCVKwe7qKl1Bd')
-        //     .then((result) => {
-        //         console.log(result.text);
-        //     }, (error) => {
-        //         console.log(error.text);
-        //     });
-        // baseAPI.get(`user`)
-        //     .then((res) => {
-        //         res.data.map(element => {
-        //             if (element.link === email){
-        //                 baseAPI.post(`user/${element.userId}`, {
-        //                     password: newPassword
-        //                 })
-        //             }
-        //         })
-        //     })
+    const sendEmail = async (e) => {
+        e.preventDefault();
+
+        baseAPI.get(`user`)
+            .then((res) => {
+                res.data.map(element => {
+                    if (element.link === email.split('@')[0]){
+                        baseAPI.put(`/user/${element.userId}`, {
+                            password: newPassword
+                        })
+                        emailjs.sendForm('service_w9um9sn', 'template_l1tmjnm', form.current, 'SiziTCVKwe7qKl1Bd')
+                    }
+                })
+            })
         setOpenSnackBar(true)
     }
     return (
@@ -47,7 +43,7 @@ export const ForgotPassword = () => {
                     <Button type='submit' variant="contained">Gửi</Button>
                 </form>
             </div>
-            <Stack content='Mật khẩu mới đã được gửi về mail của bạn' state='info' open={openSnackBar} setOpen={setOpenSnackBar} />
+            <MySnack content='Mật khẩu mới đã được gửi về mail của bạn.' state='info' open={openSnackBar} setOpen={setOpenSnackBar} />
         </div>
     )
 }

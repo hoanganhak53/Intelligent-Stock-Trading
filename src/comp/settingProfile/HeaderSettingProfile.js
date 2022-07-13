@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { styled } from '@mui/material/styles';
 import { ChangePasswordDialog } from './ChangePasswordDialog';
 import { baseAPI } from '../../api/baseAPI';
-import { Stack } from '../../components/Stack';
+import { MySnack } from '../../components/MySnack';
 
 const Input = styled('input')({
   display: 'none',
@@ -114,7 +114,7 @@ export const HeaderSettingProfile = () => {
           <div style={{ marginLeft: '8%' }}>
             <div style={{ marginBottom: '30px' }}><TextField onChange={(e) => setUsername(e.target.value)}
               size='small' variant='outlined' sx={{ padding: '0px', width: '300px' }} value={username}></TextField></div>
-            <ChangePasswordDialog />
+            <ChangePasswordDialog setOpenSnackBar={setOpenSnackBar}/>
             <div style={{ marginBottom: '30px' }}><TextField size='small' onChange={(e) => setAddress(e.target.value)}
               value={address} variant='outlined' sx={{ padding: '0px', width: '300px' }}></TextField></div>
             <div style={{ marginBottom: '30px' }}><TextField size='small' onChange={(e) => setEmail(e.target.value)}
@@ -126,7 +126,7 @@ export const HeaderSettingProfile = () => {
       </div>
       <div>
       </div>
-      <Stack content='Thay đổi thông tin thành công' state='success' open={openSnackBar} setOpen={setOpenSnackBar}></Stack>
+      <MySnack content='Thay đổi thông tin thành công' state='success' open={openSnackBar} setOpen={setOpenSnackBar}></MySnack>
     </div>
   )
 }

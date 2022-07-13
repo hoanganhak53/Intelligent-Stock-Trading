@@ -6,7 +6,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import { IconButton } from "@material-ui/core";
 
 
-export const TableUser = () => {
+export const TableUser = (props) => {
     const [data, setData] = React.useState([{
         "username": "Hoanganh",
         "password": "123123",
@@ -55,6 +55,7 @@ export const TableUser = () => {
                     baseAPI.delete(`user/${params.row.userId}`)
                     .then(() => {
                         setData(data.filter(e => e.userId !== params.row.userId))
+                        props.setOpenSnackBar(true)
                     })
                 }}>
                     <DeleteIcon />

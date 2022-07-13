@@ -6,7 +6,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import { IconButton } from "@material-ui/core";
 
 
-export const TablePosts = () => {
+export const TablePosts = (props) => {
     const [data, setData] = React.useState([
         {
             "createAt": "2022-06-29T17:52:24.471Z",
@@ -41,6 +41,7 @@ export const TablePosts = () => {
                     baseAPI.delete(`posts/${params.row.postId}`)
                     .then(() => {
                         setData(data.filter(e => e.postId !== params.row.postId))
+                        props.setOpenSnackBar(true)
                     })
                 }}>
                     <DeleteIcon />

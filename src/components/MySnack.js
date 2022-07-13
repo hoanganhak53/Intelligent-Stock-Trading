@@ -1,7 +1,7 @@
 import { Alert, Snackbar } from '@mui/material';
 import React from 'react'
 
-export const Stack = (props) => {
+export const MySnack = (props) => {
 
     const handleCloseSB = (event, reason) => {
         if (reason === 'clickaway') {

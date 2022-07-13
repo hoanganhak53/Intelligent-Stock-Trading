@@ -14,10 +14,9 @@ export const DangKy = () => {
             <DangKyForm />
           </div>
           <div style={{ height: '20px' }}></div>
-          <small style={{ paddingBottom: '54px' }}>© 2022 ITS.<b> Version </b>4.3.0.0 [20222005]</small>
+          <small style={{ paddingBottom: '60px' }}>© 2022 ITS.<b> Version </b>4.3.0.0 [20222005]</small>
         </div>} />
       <Route path='form_fill/*' element={<FormFill />}/>
     </Routes>
-
   )
 }

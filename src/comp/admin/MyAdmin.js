@@ -10,8 +10,11 @@ import BookIcon from '@mui/icons-material/Book';
 import PersonIcon from '@mui/icons-material/Person';
 import { Link, Route, Routes } from 'react-router-dom';
 import LogoutIcon from '@mui/icons-material/Logout';
+import { MySnack } from '../../components/MySnack';
 
 export const MyAdmin = () => {
+  const [openSnackBar, setOpenSnackBar] = React.useState(false);
+
   return (
     <Stack direction='row'>
       <ProSidebar style={{height: '800px', backgroundColor:'#222'}} breakPoint='md'>
@@ -23,10 +26,11 @@ export const MyAdmin = () => {
         </Menu>
       </ProSidebar>
       <Routes>
-        <Route path='user' element={<TableUser />} />
-        <Route path='posts' element={<TablePosts />} />
-        <Route path='comment' element={<TableCmt />} />
+        <Route path='user' element={<TableUser setOpenSnackBar={setOpenSnackBar}/>} />
+        <Route path='posts' element={<TablePosts setOpenSnackBar={setOpenSnackBar}/>} />
+        <Route path='comment' element={<TableCmt setOpenSnackBar={setOpenSnackBar}/>} />
       </Routes>
+      <MySnack  content='Xoá thành công' state='success' open={openSnackBar} setOpen={setOpenSnackBar} />
     </Stack>
   );
 }
