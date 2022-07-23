@@ -28,6 +28,9 @@ export const Recomment = () => {
     .then(res => {
       setData(res.data.sort((a, b) => b.postId - a.postId));
     })
+    if(localStorage.role == null){
+      localStorage.role = 2;
+    }
   },[])
   const handleChangePage = (event, page) => {
     setCurrentPage(page);

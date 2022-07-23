@@ -93,7 +93,7 @@ export const HeaderProfile = () => {
         </div>
         <div className='row_container' style={{ marginTop: '20px' }}>
           <CalendarMonthIcon color='action'></CalendarMonthIcon>
-          <p style={{ margin: '3px 5px 0px 3px', color: 'gray' }}>Đã tham gian 1 năm trước</p>
+          <p style={{ margin: '3px 5px 0px 3px', color: 'gray' }}>Đã tham gian 1 ngày trước</p>
           <EmailIcon color='action' sx={{ marginLeft: '50px' }} />
           <p style={{ margin: '3px 5px 0px 3px', color: 'gray' }}>{data.link}@gmail.com</p>
           <Facebook style={{ color: '#1877F2', marginLeft: '50px' }} />

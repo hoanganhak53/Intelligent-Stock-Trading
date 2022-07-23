@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { baseAPI } from '../../api/baseAPI';
-import { NewFrame } from '../Recommen/NewFrame';
+import { NewFrame } from '../Recomment/NewFrame';
 
 //0 all 1 nguoi dung cap 1 2 nguoi dung cap 2
 
