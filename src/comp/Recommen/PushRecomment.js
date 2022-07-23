@@ -177,7 +177,7 @@ export default function PushRecomment() {
                             </IconButton>
                         </Stack>
                         <TextareaAutosize value={content} onChange={(e) => {setContent(e.target.value)}}
-                            style={{whiteSpace:'pre-line', width:'875px', padding:'5px', fontSize:'1rem'}} maxWidth minRows={10}>
+                            style={{whiteSpace:'pre-line', width:'820px', padding:'5px', fontSize:'1rem'}} maxWidth minRows={10}>
                         </TextareaAutosize>                        
                     </div>
 

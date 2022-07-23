@@ -7,11 +7,11 @@ import { baseAPI } from '../../../api/baseAPI';
 import { MySnack } from '../../../components/MySnack';
 
 export const ForgotPassword = () => {
-    const [openSnackBar, setOpenSnackBar] = React.useState(true);
+    const [openSnackBar, setOpenSnackBar] = React.useState(false);
     const navigate = useNavigate()
     const form = useRef();
     const [email, setEmail] = useState('')
-    const newPassword = Math.random().toString(36).slice(2)
+    const [newPassword, setNew] = useState(Math.random().toString(36).slice(2))
     const sendEmail = async (e) => {
         e.preventDefault();
 
