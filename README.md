@@ -11,6 +11,8 @@ The website is built and developed using ReactJS. Also use some external librari
 
 ## Run the website locally
 
+### Required to install Nodejs environment
+
 ### Step 1: Clone project
 
 ```sh
@@ -18,23 +20,15 @@ git clone https://github.com/hoanganhak53/prj2.git
 cd website
 ```
 
-## Step 2: Load documentation content
-
-The Markdown content for the Harbor [docs](https://goharbor.io/docs) is drawn from the [`docs`](./docs) folder and the `release-X` branches. To pull that content into your local website repo:
-
-```sh
-make prepare
-```
-
 This copies the `docs` directory and the `release-X` branches into this repo's [`content`](./content) folder, separated by versions, where it can be processed by Hugo.
 
-## Step 3: Install npm dependencies
+## Step 2: Install npm dependencies
 
 ```sh
 npm i
 ```
 
-## Step 4: Run app in server mode
+## Step 3: Run app in server mode
 
 ```sh
 npm start
