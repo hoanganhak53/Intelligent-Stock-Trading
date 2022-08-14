@@ -3,8 +3,9 @@ import { DataGrid } from '@mui/x-data-grid';
 import { baseAPI } from '../../api/baseAPI';
 import { format } from 'date-fns'
 import DeleteIcon from "@material-ui/icons/Delete";
-import { IconButton } from "@material-ui/core";
-
+import { IconButton, Tooltip } from "@material-ui/core";
+import DownloadForOfflineIcon from '@mui/icons-material/DownloadForOffline';
+import { CSVLink } from "react-csv";
 
 export const TablePosts = (props) => {
     const [data, setData] = React.useState([
@@ -59,13 +60,23 @@ export const TablePosts = (props) => {
     }, [])
 
     return (
-        <div style={{ height: 640, width: '100%', margin: '50px 5%' }}>
-            <DataGrid getRowId={(row) => row.postId}
-                rows={data}
-                columns={columns}
-                pageSize={10}
-                rowsPerPageOptions={[10]}
-            />
+        <div style={{width: '74%'}}>
+            <Tooltip title="Download Data" style={{margin: '20px 50px 0px 101%'}}>
+                <IconButton>
+                    <CSVLink data={data}   filename={"all-post-ist.csv"} target="_blank">
+                        <DownloadForOfflineIcon sx={{color: 'gray'}}></DownloadForOfflineIcon>
+                    </CSVLink>
+                </IconButton>
+            </Tooltip>
+            <div style={{ height: 640, width: '100%', margin: '40px 5%' }}>
+                <DataGrid getRowId={(row) => row.postId}
+                    rows={data}
+                    columns={columns}
+                    pageSize={10}
+                    rowsPerPageOptions={[10]}
+                />
+            </div>            
         </div>
+
     );
 }
